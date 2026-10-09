@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ar" dir="ltr"><head><meta charset="utf-8">
+<style>
+@font-face { font-family: Amiri; src: url(../fonts/Amiri-Regular.ttf); }
+@font-face { font-family: Amiri; font-weight: bold; src: url(../fonts/Amiri-Bold.ttf); }
+body { margin: 0; background: #888; }
+.plate { display: block; margin: 20px; }
+svg text { font-family: Amiri; fill: #2b2118; unicode-bidi: plaintext; }
+</style></head><body>
+
+<svg class="plate" id="t_eras" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#f4ecd8"/>
+  <rect x="16" y="16" width="1568" height="968" fill="none" stroke="#8a6a3a" stroke-width="2"/>
+  <text x="800" y="72" text-anchor="middle" font-size="42" font-weight="bold">الخطّ الزمنيّ للرواية: ثلاثةُ أزمنةٍ يجمعها قرصٌ يُحجَب</text>
+  <g id="te"></g>
+</svg>
+
+<svg class="plate" id="t_fatimid" width="1400" height="2100" viewBox="0 0 1400 2100">
+  <rect width="1400" height="2100" fill="#f4ecd8"/>
+  <rect x="16" y="16" width="1368" height="2068" fill="none" stroke="#8a6a3a" stroke-width="2"/>
+  <text x="700" y="72" text-anchor="middle" font-size="40" font-weight="bold">زمنُ سيفِ بن سلامة والحاكم بأمر الله (٣٧٥–٤١١هـ / ٩٨٥–١٠٢١م)</text>
+  <g id="tf"></g>
+</svg>
+
+<script src="common.js"></script>
+<script>
+const AR = n => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+const HIST = '#8a5a1a', FIC = '#2f6f73', BOTH = '#7a2a6a';
+function legend(g, x, y) {
+  [[HIST, 'حدثٌ تاريخيٌّ موثَّق'], [FIC, 'حدثٌ روائيٌّ متخيَّل'], [BOTH, 'تاريخيٌّ بتفسيرٍ روائيّ']].forEach(([c, t], i) => {
+    el(g, 'circle', { cx: x - i * 300, cy: y, r: 10, fill: c }); el(g, 'text', { x: x - i * 300 - 20, y: y + 9, 'text-anchor': 'end', 'font-size': 24 }, t);
+  });
+}
+// ---------- eras
+(function () {
+  const g = document.getElementById('te');
+  const bands = [
+    { x0: 1080, x1: 1540, title: 'مصر القديمة — أخت-آتون', sub: 'السِّفر الرابع', y0: -1353, y1: -1330, fmt: v => AR(-v) + ' ق.م', ticks: [-1350, -1345, -1340, -1335] ,
+      ev: [[-1350, 'خاي في العشرين: «أرِني النظام»', FIC], [-1349, 'تأسيس أخت-آتون (السنة ٥)', HIST], [-1342, 'استقبال الجزية (السنة ١٢)', HIST], [-1338, 'كسوف ١٤ مايو: ٣٨٠ عَدّة', BOTH], [-1336, 'موت إخناتون تقريبًا', HIST], [-1333, 'خاي يدفن الجرّة', FIC]] },
+    { x0: 560, x1: 1020, title: 'القاهرة الفاطميّة', sub: 'الأسفار ١–٣ و٥', y0: 965, y1: 1025, fmt: v => AR(v) + 'م', ticks: [970, 985, 1000, 1015],
+      ev: [[969, 'تأسيس القاهرة', HIST], [985, 'مولد المنصورَين', BOTH], [996, 'البيعة في الحادية عشرة', HIST], [1000, 'مقتل برجوان · قران الزهرة وعطارد', HIST], [1005, 'دار الحكمة · القبض على سيف', BOTH], [1006, 'المستعر الأعظم', HIST], [1009, 'موت ابن يونس', HIST], [1011, 'حساب الهرم: ٢٩ صفر ١٤٤٩', FIC], [1021, 'ليلة المقطّم', BOTH]] },
+    { x0: 60, x1: 500, title: 'زماننا', sub: 'المداخل والسِّفر السادس', y0: 2026.3, y1: 2027.8, fmt: v => v, ticks: [],
+      ev: [['يوليو ٢٠٢٦', 'الورقة · سور الأزبكيّة', FIC], ['نوفمبر ٢٠٢٦', 'سراديب دندرة', FIC], ['يناير ٢٠٢٧', 'جرّة المنيا: ٣٨٦', FIC], ['مارس ٢٠٢٧', 'شهادة الميلاد', FIC], ['٢٩ يوليو ٢٠٢٧', 'امرأة في المطار', FIC], ['٢ أغسطس ٢٠٢٧', 'الكسوف الكلّيّ', BOTH]] }
+  ];
+  const AY = 520;
+  bands.forEach((b, bi) => {
+    el(g, 'rect', { x: b.x0 - 10, y: 150, width: b.x1 - b.x0 + 20, height: 760, rx: 14, fill: ['#efe2c6', '#eadbc0', '#e4dccb'][bi], stroke: '#c9b38a' });
+    el(g, 'text', { x: (b.x0 + b.x1) / 2, y: 200, 'text-anchor': 'middle', 'font-size': 32, 'font-weight': 'bold' }, b.title);
+    el(g, 'text', { x: (b.x0 + b.x1) / 2, y: 238, 'text-anchor': 'middle', 'font-size': 22, fill: '#7a5a3a' }, b.sub);
+    // axis runs right-to-left (older on the right)
+    const n = b.ev.length, X = i => b.x1 - 30 - i * (b.x1 - b.x0 - 60) / (n - 1);
+    el(g, 'line', { x1: b.x0, y1: AY, x2: b.x1, y2: AY, stroke: '#2b2118', 'stroke-width': 4 });
+    b.ev.forEach(([v, t, c], i) => {
+      const x = X(i), up = i % 2 === 0, lvl = Math.floor(i / 2) % 2, ly = up ? AY - 90 - lvl * 120 : AY + 120 + lvl * 120;
+      el(g, 'line', { x1: x, y1: AY, x2: x, y2: up ? ly + 14 : ly - 30, stroke: c, 'stroke-width': 2 });
+      el(g, 'circle', { cx: x, cy: AY, r: 9, fill: c });
+      el(g, 'text', { x, y: up ? AY + 34 : AY - 18, 'text-anchor': 'middle', 'font-size': 19, fill: '#5a4a3a' }, b.fmt(v));
+      t.split(' · ').forEach((w, k) => el(g, 'text', { x, y: ly + k * 28, 'text-anchor': 'middle', 'font-size': 21, fill: c, 'font-weight': 'bold' }, w));
+    });
+  });
+  // zig-zag breaks
+  [[530, '٢٣٠٠ سنة'], [1050, '١٠٠٠ سنة']].forEach(([x, t]) => {
+    el(g, 'path', { d: `M${x - 10},${AY - 20} L${x + 10},${AY - 6} L${x - 10},${AY + 6} L${x + 10},${AY + 20}`, stroke: '#b03a2e', 'stroke-width': 3, fill: 'none' });
+  });
+  el(g, 'text', { x: 1050, y: 960, 'text-anchor': 'middle', 'font-size': 22, fill: '#b03a2e' }, '⟵ يتّجه الزمنُ من اليمين إلى اليسار، كما تُقرأ العربيّة');
+  legend(g, 1530, 120);
+})();
+
+// ---------- detailed Fatimid timeline (vertical)
+(function () {
+  const g = document.getElementById('tf');
+  const Y0 = 375, Y1 = 412, top = 190, bot = 2010, AX = 700;
+  const KP = [[375, 200], [386, 400], [390, 560], [396, 1330], [402.3, 1700], [408, 1800], [412, 1990]];
+  const Y = h => { for (let i = 1; i < KP.length; i++) if (h <= KP[i][0]) { const [a, ya] = KP[i - 1], [b, yb] = KP[i]; return ya + (h - a) / (b - a) * (yb - ya); } return KP[KP.length - 1][1]; };
+  el(g, 'line', { x1: AX, y1: top - 20, x2: AX, y2: bot + 10, stroke: '#2b2118', 'stroke-width': 4 });
+  const greg = h => Math.round(h * 0.970229 + 621.5643);
+  for (let h = 375; h <= 411; h++) {
+    const major = h % 5 === 0;
+    el(g, 'line', { x1: AX - (major ? 16 : 8), y1: Y(h), x2: AX + (major ? 16 : 8), y2: Y(h), stroke: '#2b2118', 'stroke-width': major ? 2.5 : 1 });
+    if ([375,386,390,395,400,405,411].includes(h)) { el(g, 'line', { x1: 100, y1: Y(h), x2: 1360, y2: Y(h), stroke: '#b9a27a', 'stroke-width': 1, 'stroke-dasharray': '4 8' }); el(g, 'rect', { x: 1195, y: Y(h) - 16, width: 175, height: 30, rx: 6, fill: '#2b2118' }); el(g, 'text', { x: 1282, y: Y(h) + 7, 'text-anchor': 'middle', 'font-size': 20, style: 'fill:#f4ecd8' }, AR(h) + 'هـ / ' + AR(greg(h)) + 'م'); }
+  }
+  // book bands on the far left
+  const books = [[375, 391.5, 'السِّفر الأوّل: عدد الاسم'], [391.5, 395.9, 'السِّفر الثاني: كتاب الأرصاد'], [395.9, 402.2, 'السِّفر الثالث: رحلة الصعيد'], [402.2, 411.9, 'السِّفر الخامس: الثُّغرة']];
+  books.forEach(([a, b, t], i) => {
+    el(g, 'rect', { x: 40, y: Y(a), width: 46, height: Y(b) - Y(a), fill: ['#d9c49a', '#c9b48a', '#d9c49a', '#c9b48a'][i], stroke: '#8a6a3a' });
+    el(g, 'text', { x: 63, y: (Y(a) + Y(b)) / 2, 'text-anchor': 'middle', 'font-size': 22, transform: `rotate(-90 63 ${(Y(a) + Y(b)) / 2})` }, t);
+  });
+  // events: [hijri (fractional), text, kind, side]  side: 1 = right (Hakim/state), -1 = left (Saif)
+  const E = [
+    [375.23, 'مولد الحاكم (المنصور) بالقاهرة', HIST, 1], [375.23, 'مولد منصور بن سلامة بالفسطاط', FIC, -1],
+    [386.75, 'موت العزيز ببلبيس، وبيعة الحاكم في الحادية عشرة', HIST, 1], [386.75, 'منصور يحمل الجرّة لأوّل مرّة', FIC, -1],
+    [389.2, 'ابن يونس يجمع «منصور» = ٣٨٦', FIC, 1],
+    [390.3, 'مقتل برجوان', HIST, 1], [390.45, 'قِران الزهرة وعطارد — ابن يونس يلقى الغلام ويسمّيه «سيفًا»', BOTH, -1],
+    [391.1, 'سطح الرصد على المقطّم · روحانيّة الزهرة', FIC, -1], [391.3, 'الكسوف في الطَّست', FIC, -1], [391.6, 'إحصاء كلّ من اسمُه منصور', FIC, 1],
+    [392.4, 'سُهيل يُنذر سيفًا للمرّة الأولى', FIC, -1],
+    [394.6, 'مقتل سُهيل عند المقياس', FIC, -1], [394.9, 'سِجِلّ قتل الكلاب', BOTH, 1],
+    [395.15, 'منع خروج النساء ليلًا · منع الملوخيّة والسمك بلا قشر', BOTH, 1], [395.45, 'افتتاح دار الحكمة', HIST, 1],
+    [395.55, 'ليلة البستان مع ستّ الملك', FIC, -1], [395.7, 'القبض على سيف — خزانة البنود', FIC, -1], [395.85, 'الهرب في النيل «قِبلي»', FIC, -1],
+    [396.65, 'المستعر الأعظم في العقرب (٣٠ أبريل ١٠٠٦م)', HIST, 1], [396.75, 'سراديب دندرة', FIC, -1], [397.1, 'بني حسن: شهادة مُراقِب الساعات', FIC, -1],
+    [399.8, 'موت ابن يونس · ظهور «زحل»', BOTH, 1], [400.3, 'هدم كنيسة القيامة', HIST, 1],
+    [401.3, 'ثمن اليوم الرابع: موت خالد', FIC, -1], [402.0, 'حجرة المأمون: الحساب يقع في ٢٩ صفر ١٤٤٩', FIC, -1], [402.1, 'العودة إلى القاهرة · موت سلامة', FIC, -1],
+    [408.8, 'دعوة حمزة بن عليّ إلى ألوهيّة الحاكم', HIST, 1],
+    [411.6, 'سيف يسلّم «أرصاد وأطوار» · القبض عليه', FIC, -1], [411.75, 'وشاية ستّ الملك · المواجهة وجهًا لوجه', FIC, 1],
+    [411.82, 'ليلة المقطّم ٢٧ شوّال (١٣ فبراير ١٠٢١م) — الاختفاء', BOTH, 1]
+  ];
+  const used = { '1': [], '-1': [] };
+  E.forEach(([h, t, c, s]) => {
+    let y = Y(h); const arr = used[s];
+    while (arr.some(v => Math.abs(v - y) < 38)) y += 38;
+    arr.push(y);
+    const x = AX + s * 120;
+    el(g, 'circle', { cx: AX, cy: Y(h), r: 8, fill: c });
+    el(g, 'path', { d: `M${AX + s * 8},${Y(h)} L${x},${y}`, stroke: c, 'stroke-width': 1.5, fill: 'none' });
+    el(g, 'text', { x: x + s * 8, y: y + 8, 'text-anchor': s > 0 ? 'start' : 'end', 'font-size': 23, fill: c, 'font-weight': c === FIC ? 'normal' : 'bold' }, t.replace(/ · /g, ' · '));
+  });
+  el(g, 'text', { x: AX + 40, y: 150, 'text-anchor': 'start', 'font-size': 26, 'font-weight': 'bold' }, 'القصر والدولة ⟶');
+  el(g, 'text', { x: AX - 40, y: 150, 'text-anchor': 'end', 'font-size': 26, 'font-weight': 'bold' }, '⟵ سيفُ بن سلامة');
+  legend(g, 1340, 2062);
+})();
+</script>
+</body></html>

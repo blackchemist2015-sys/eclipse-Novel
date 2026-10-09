@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<style>
+@font-face { font-family: Amiri; src: url(../fonts/Amiri-Regular.ttf); }
+@font-face { font-family: Amiri; font-weight: bold; src: url(../fonts/Amiri-Bold.ttf); }
+@font-face { font-family: Kufi; src: url(../fonts/ReemKufi.ttf); }
+@font-face { font-family: Ruqaa; src: url(../fonts/ArefRuqaa-Regular.ttf); }
+body { margin: 0; background: #888; }
+.plate { display: block; margin: 20px; }
+svg text { font-family: Amiri; }
+</style></head><body>
+
+<!-- ======================= COVER ======================= -->
+<svg class="plate" id="cover" width="1200" height="1800" viewBox="0 0 1200 1800">
+  <defs>
+    <linearGradient id="cv-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#05070f"/><stop offset=".55" stop-color="#0d1430"/>
+      <stop offset=".78" stop-color="#3a2a2a"/><stop offset="1" stop-color="#7a4a26"/>
+    </linearGradient>
+    <radialGradient id="cv-corona" cx="0.5" cy="0.5" r="0.5">
+      <stop offset=".30" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset=".36" stop-color="#fdf6e0" stop-opacity=".85"/>
+      <stop offset=".55" stop-color="#d9e4ff" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#9fb4ff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="cv-blur"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="cv-blur2"><feGaussianBlur stdDeviation="9"/></filter>
+  </defs>
+  <rect width="1200" height="1800" fill="url(#cv-sky)"/>
+  <g id="cv-stars"></g>
+  <g id="cv-ring"></g>
+  <circle cx="600" cy="600" r="430" fill="url(#cv-corona)"/>
+  <g id="cv-rays" filter="url(#cv-blur)"></g>
+  <circle cx="600" cy="600" r="158" fill="#fff" filter="url(#cv-blur2)" opacity=".9"/>
+  <circle cx="600" cy="600" r="150" fill="#03040a"/>
+  <circle cx="742" cy="548" r="9" fill="#fff" filter="url(#cv-blur)"/>
+  <g id="cv-sky-line"></g>
+  <text x="600" y="1290" text-anchor="middle" font-size="150" font-weight="bold" fill="#e2bd63" style="letter-spacing:2px">أرصادٌ وأَطْوار</text>
+  <line x1="330" y1="1340" x2="870" y2="1340" stroke="#e2bd63" stroke-width="1.5" opacity=".7"/>
+  <text x="600" y="1415" text-anchor="middle" font-size="58" fill="#f1e3c0">سِرُّ الحاكم — ثُغْرَةُ الكُسوف</text>
+  <text x="600" y="1500" text-anchor="middle" font-size="44" fill="#cfb27a" font-family="Kufi">رواية</text>
+  <text x="600" y="1740" text-anchor="middle" font-size="30" fill="#cfb27a" opacity=".85">٣٨٦</text>
+</svg>
+
+<!-- ======================= PLATE: night of the two births ======================= -->
+<svg class="plate" id="p_birth" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="b-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070b1a"/><stop offset=".62" stop-color="#18203c"/><stop offset="1" stop-color="#2a2236"/>
+    </linearGradient>
+    <radialGradient id="b-cityglow" cx=".78" cy=".64" r=".45">
+      <stop offset="0" stop-color="#ff9a3c" stop-opacity=".55"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="b-door" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffd27a" stop-opacity=".95"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#b-sky)"/>
+  <rect width="1600" height="1000" fill="url(#b-cityglow)"/>
+  <g id="b-stars"></g>
+  <g id="b-city"></g>
+  <!-- mosque of Amr on the left, with the astronomer on the roof -->
+  <g fill="#0a0d18">
+    <rect x="60" y="560" width="330" height="90"/>
+    <rect x="300" y="430" width="34" height="130"/><path d="M296,430 L317,388 L338,430 Z"/>
+    <rect x="292" y="470" width="50" height="10"/>
+    <g id="b-arches"></g>
+  </g>
+  <g transform="translate(150,560)">
+    <circle cx="0" cy="-58" r="34" fill="none" stroke="#c99a45" stroke-width="3"/>
+    <line x1="-34" y1="-58" x2="34" y2="-58" stroke="#c99a45" stroke-width="1.5"/>
+    <line x1="0" y1="-24" x2="0" y2="0" stroke="#c99a45" stroke-width="3"/>
+  </g>
+  <g id="b-astro"></g>
+  <!-- wasteland mounds -->
+  <path d="M0,700 C200,650 380,690 560,660 C760,630 900,700 1100,690 C1300,680 1450,700 1600,690 L1600,1000 L0,1000 Z" fill="#14100d"/>
+  <path d="M0,820 C240,780 420,830 640,800 C860,770 1040,840 1300,820 C1440,810 1520,830 1600,826 L1600,1000 L0,1000 Z" fill="#0c0907"/>
+  <!-- the mud hut -->
+  <g>
+    <path d="M520,860 L540,700 L840,690 L860,860 Z" fill="#2a1c12"/>
+    <path d="M505,705 L548,668 L832,660 L875,698 Z" fill="#3a2a18"/>
+    <g id="b-fronds" stroke="#5a4426" stroke-width="2"></g>
+    <ellipse cx="690" cy="790" rx="120" ry="110" fill="url(#b-door)"/>
+    <path d="M650,860 L652,750 C652,730 728,730 728,750 L730,860 Z" fill="#ffcf73"/>
+    <path d="M650,860 L652,750 C652,730 728,730 728,750 L730,860 Z" fill="none" stroke="#1a120a" stroke-width="5"/>
+    <circle cx="690" cy="772" r="6" fill="#fff4cf"/>
+  </g>
+  <g id="b-midwife"></g>
+  <text x="1270" y="330" text-anchor="middle" font-size="30" fill="#ffcf8a" opacity=".85">القاهرة تحتفل</text>
+  <text x="690" y="925" text-anchor="middle" font-size="30" fill="#e9c88f" opacity=".85">الفسطاط: حجرةٌ على طرف الخرابة</text>
+  <text x="200" y="420" text-anchor="middle" font-size="26" fill="#c99a45" opacity=".9">جامع عمرو — ابن يونس يرصد</text>
+</svg>
+
+<!-- ======================= PLATE: the boy-caliph enters Cairo ======================= -->
+<svg class="plate" id="p_procession" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="pr-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a1d3a"/><stop offset=".45" stop-color="#8a3f3a"/><stop offset=".72" stop-color="#e98a3a"/><stop offset="1" stop-color="#f7c46a"/>
+    </linearGradient>
+    <radialGradient id="pr-sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff2c4"/><stop offset=".6" stop-color="#ffd27a"/><stop offset="1" stop-color="#ffb04a" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#pr-sky)"/>
+  <circle cx="1180" cy="700" r="150" fill="url(#pr-sun)"/>
+  <circle cx="1180" cy="700" r="70" fill="#fff0c0"/>
+  <g fill="#1b1018">
+    <!-- city wall and gate -->
+    <rect x="860" y="560" width="740" height="200"/>
+    <g id="pr-crenel"></g>
+    <rect x="1040" y="470" width="120" height="290"/><rect x="1250" y="470" width="120" height="290"/>
+    <path d="M1040,470 L1160,470 L1160,455 L1040,455 Z"/><path d="M1250,470 L1370,470 L1370,455 L1250,455 Z"/>
+    <path d="M1160,560 L1250,560 L1250,600 Z" />
+    <rect x="1440" y="420" width="26" height="140"/><path d="M1436,420 L1453,380 L1470,420 Z"/>
+    <path d="M920,560 C920,500 1000,500 1000,560 Z"/>
+  </g>
+  <path d="M1170,760 L1170,650 C1170,590 1240,590 1240,650 L1240,760 Z" fill="#f9c870" opacity=".85"/>
+  <path d="M0,760 L1600,760 L1600,1000 L0,1000 Z" fill="#20140f"/>
+  <path d="M0,760 C300,750 600,770 900,758 C1200,748 1400,762 1600,756" stroke="#3a2418" stroke-width="6" fill="none"/>
+  <g id="pr-proc" fill="#120a0e"></g>
+  <text x="560" y="950" text-anchor="middle" font-size="30" fill="#f2c47a" opacity=".9">الموكب من بِلبيس: جثمانُ العزيز في عِمارية، وخلفه غلامٌ في الحادية عشرة</text>
+</svg>
+
+<!-- ======================= PLATE: House of Wisdom ======================= -->
+<svg class="plate" id="p_hikma" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="h-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b2a1a"/><stop offset="1" stop-color="#1c130c"/></linearGradient>
+    <linearGradient id="h-beam" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#ffe7a8" stop-opacity=".55"/><stop offset="1" stop-color="#ffe7a8" stop-opacity="0.05"/></linearGradient>
+    <filter id="h-blur"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#h-bg)"/>
+  <g id="h-arches"></g>
+  <g id="h-shelves"></g>
+  <rect x="1060" y="60" width="70" height="90" fill="#ffe9b3"/>
+  <path d="M1060,150 L1130,150 L1010,800 L860,800 Z" fill="url(#h-beam)"/>
+  <rect x="880" y="760" width="150" height="60" fill="#fff0c8" opacity=".85" transform="skewX(-12)"/>
+  <path d="M0,820 L1600,820 L1600,1000 L0,1000 Z" fill="#140d08"/>
+  <g id="h-scribes"></g>
+  <g opacity=".33" filter="url(#h-blur)"><path d="M300,800 L310,380 C310,330 360,320 370,370 L380,800 Z" fill="#d9d9d0"/></g>
+  <g opacity=".42"><path d="M310,800 L318,400 C320,355 352,350 360,392 L370,800 Z" fill="#cfcfc4"/><circle cx="340" cy="360" r="26" fill="#cfcfc4"/></g>
+  <text x="800" y="950" text-anchor="middle" font-size="32" fill="#f0d9a6">دارُ الحكمة بالقاهرة — افتُتحت في جمادى الآخرة ٣٩٥هـ / ١٠٠٥م</text>
+</svg>
+
+<!-- ======================= PLATE: SN 1006 over Qena ======================= -->
+<svg class="plate" id="p_supernova" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="s-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#03050c"/><stop offset=".7" stop-color="#0d1630"/><stop offset="1" stop-color="#1d2a48"/></linearGradient>
+    <radialGradient id="s-nova" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffffff"/><stop offset=".08" stop-color="#fffbe8"/><stop offset=".25" stop-color="#cfe0ff" stop-opacity=".55"/><stop offset="1" stop-color="#9fb8ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="s-ground" cx=".42" cy="0" r="1"><stop offset="0" stop-color="#3a4870" stop-opacity=".55"/><stop offset="1" stop-color="#3a4870" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#s-sky)"/>
+  <g id="s-stars"></g>
+  <g id="s-scorpius"></g>
+  <circle cx="640" cy="560" r="230" fill="url(#s-nova)"/>
+  <g id="s-spikes"></g>
+  <circle cx="640" cy="560" r="9" fill="#fff"/>
+  <path d="M0,690 C200,670 380,690 600,676 C820,662 1050,690 1250,672 C1400,660 1500,680 1600,672 L1600,1000 L0,1000 Z" fill="#0b0f1c"/>
+  <rect x="0" y="690" width="1600" height="310" fill="url(#s-ground)"/>
+  <!-- kiln roof -->
+  <path d="M760,1000 L800,790 L1520,790 L1560,1000 Z" fill="#1d1712"/>
+  <rect x="800" y="770" width="720" height="22" fill="#2b2218"/>
+  <g id="s-people"></g>
+  <text x="640" y="470" text-anchor="middle" font-size="30" fill="#e8eeff">النجم الجديد</text>
+  <text x="980" y="250" text-anchor="middle" font-size="26" fill="#b7c3e8" opacity=".9">العقرب</text>
+  <text x="300" y="905" text-anchor="middle" font-size="28" fill="#c8d2f0" opacity=".85">الأفق الجنوبيّ من سطح مِقلاةٍ في قِنا</text>
+</svg>
+
+<!-- ======================= PLATE: the eclipse over Akhetaten ======================= -->
+<svg class="plate" id="p_amarna" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="a-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0f22"/><stop offset=".55" stop-color="#1b2645"/><stop offset=".8" stop-color="#6b4a52"/><stop offset="1" stop-color="#e2955a"/></linearGradient>
+    <radialGradient id="a-cor" cx=".5" cy=".5" r=".5"><stop offset=".26" stop-color="#fff"/><stop offset=".34" stop-color="#fbf4dc" stop-opacity=".8"/><stop offset=".6" stop-color="#d6e2ff" stop-opacity=".22"/><stop offset="1" stop-color="#d6e2ff" stop-opacity="0"/></radialGradient>
+    <filter id="a-blur"><feGaussianBlur stdDeviation="2.5"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#a-sky)"/>
+  <g id="a-stars"></g>
+  <circle cx="800" cy="250" r="260" fill="url(#a-cor)"/>
+  <g id="a-rays" filter="url(#a-blur)"></g>
+  <circle cx="800" cy="250" r="80" fill="#02030a"/>
+  <circle cx="330" cy="330" r="6" fill="#fff"/><text x="330" y="372" text-anchor="middle" font-size="24" fill="#dfe6ff">الزهرة</text>
+  <circle cx="1250" cy="200" r="4" fill="#ff8a6a"/><text x="1250" y="238" text-anchor="middle" font-size="24" fill="#ffc2b0">المرّيخ</text>
+  <!-- eastern cliffs with the notch (akhet) -->
+  <path d="M0,640 L380,600 L520,615 L640,560 L720,560 L760,640 L840,640 L880,560 L960,560 L1080,612 L1300,600 L1600,630 L1600,700 L0,700 Z" fill="#2c2433"/>
+  <path d="M0,700 L1600,700 L1600,1000 L0,1000 Z" fill="#3a2e2a"/>
+  <!-- open court with offering tables -->
+  <g id="a-court"></g>
+  <g fill="#120d10">
+    <path d="M90,700 L90,520 L300,520 L300,700 Z"/><path d="M1300,700 L1300,520 L1510,520 L1510,700 Z"/>
+    <rect x="130" y="470" width="8" height="60"/><rect x="250" y="470" width="8" height="60"/>
+    <rect x="1340" y="470" width="8" height="60"/><rect x="1460" y="470" width="8" height="60"/>
+  </g>
+  <path d="M690,770 L910,770 L930,810 L670,810 Z" fill="#1a1316"/>
+  <g id="a-king"></g>
+  <g id="a-crowd"></g>
+  <text x="800" y="960" text-anchor="middle" font-size="30" fill="#ffd9a6">أخت-آتون — الساعة السادسة من نهار ١٤ مايو ١٣٣٨ ق.م: ثلاثمئةٌ وثمانون عَدّة</text>
+</svg>
+
+<!-- ======================= PLATE: the night on al-Muqattam ======================= -->
+<svg class="plate" id="p_muqattam" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="m-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#02030a"/><stop offset=".7" stop-color="#0b1022"/><stop offset="1" stop-color="#151a30"/></linearGradient>
+    <linearGradient id="m-tail" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#cfe3ff" stop-opacity=".75"/><stop offset="1" stop-color="#cfe3ff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="m-city" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffb35a" stop-opacity=".35"/><stop offset="1" stop-color="#ffb35a" stop-opacity="0"/></radialGradient>
+    <filter id="m-blur"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="m-blur8"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#m-sky)"/>
+  <g id="m-stars"></g>
+  <!-- comet low in the east (right) -->
+  <g transform="translate(1300,470) rotate(-18)">
+    <path d="M-10,0 C-14,-80 -30,-170 -40,-230 L40,-230 C30,-170 14,-80 10,0 Z" fill="url(#m-tail)" filter="url(#m-blur)"/>
+    <circle cx="0" cy="0" r="9" fill="#eef5ff" filter="url(#m-blur)"/>
+  </g>
+  <!-- city below to the west (left) -->
+  <ellipse cx="380" cy="760" rx="420" ry="120" fill="url(#m-city)"/>
+  <path d="M0,700 L1600,700 L1600,1000 L0,1000 Z" fill="#06070d"/>
+  <g id="m-lights"></g>
+  <path d="M40,820 C200,800 380,840 560,812" stroke="#16203a" stroke-width="16" fill="none"/>
+  <circle cx="260" cy="812" r="3" fill="#ffd28a"/><circle cx="430" cy="822" r="3" fill="#ffd28a"/>
+  <!-- the plateau -->
+  <path d="M640,1000 L700,720 L1600,700 L1600,1000 Z" fill="#14121a"/>
+  <rect x="760" y="690" width="12" height="60" fill="#1f1c26"/><rect x="1460" y="680" width="12" height="70" fill="#1f1c26"/>
+  <rect x="1010" y="760" width="90" height="70" fill="#24202c"/>
+  <!-- folded robe, turban, slippers -->
+  <rect x="1150" y="806" width="110" height="24" rx="4" fill="#cdbfa3"/>
+  <rect x="1158" y="792" width="94" height="16" rx="4" fill="#bfae8e"/>
+  <ellipse cx="1205" cy="786" rx="30" ry="12" fill="#e8e1d2"/>
+  <ellipse cx="1285" cy="826" rx="18" ry="6" fill="#6a4a30"/><ellipse cx="1310" cy="828" rx="18" ry="6" fill="#6a4a30"/>
+  <g id="m-donkey"></g>
+  <g id="m-saif"></g>
+  <g id="m-ghosts" filter="url(#m-blur)"></g>
+  <text x="1300" y="245" text-anchor="middle" font-size="26" fill="#cfe3ff" opacity=".9">كوكبُ الذؤابة</text>
+  <text x="330" y="960" text-anchor="middle" font-size="28" fill="#f2c47a" opacity=".85">القاهرة: «نهرٌ أسودُ فيه ضوءان»</text>
+  <text x="1200" y="960" text-anchor="middle" font-size="28" fill="#d9d2c2" opacity=".9">ثوبٌ مطويّ، وعمامة، وخُفّان</text>
+</svg>
+
+<script src="common.js"></script>
+<script>
+// ---------- cover
+(function () {
+  const svg = document.getElementById('cover');
+  stars(document.getElementById('cv-stars'), 260, 0, 0, 1200, 1100, 7, 1.9);
+  const ring = document.getElementById('cv-ring');
+  el(ring, 'circle', { cx: 600, cy: 600, r: 470, fill: 'none', stroke: '#c9a25a', 'stroke-width': 2, opacity: .55 });
+  el(ring, 'circle', { cx: 600, cy: 600, r: 452, fill: 'none', stroke: '#c9a25a', 'stroke-width': 1, opacity: .45 });
+  for (let d = 0; d < 360; d += 2) {
+    const a = d * Math.PI / 180, r1 = 452, r2 = d % 10 === 0 ? 432 : 442;
+    el(ring, 'line', { x1: 600 + r1 * Math.cos(a), y1: 600 + r1 * Math.sin(a), x2: 600 + r2 * Math.cos(a), y2: 600 + r2 * Math.sin(a), stroke: '#c9a25a', 'stroke-width': d % 10 === 0 ? 1.6 : .8, opacity: .55 });
+  }
+  const abjad = 'أبجدهوزحطيكلمنسعفصقرشتثخذضظغ'.split('');
+  abjad.forEach((ch, i) => {
+    const a = (i / abjad.length) * 2 * Math.PI - Math.PI / 2;
+    el(ring, 'text', { x: 600 + 495 * Math.cos(a), y: 600 + 495 * Math.sin(a) + 10, 'text-anchor': 'middle', 'font-size': 28, fill: '#c9a25a', opacity: ['م','ن','ص','و','ر'].includes(ch) ? 1 : .45 }, ch);
+  });
+  const rays = document.getElementById('cv-rays'); const r = rng(11);
+  for (let i = 0; i < 140; i++) {
+    const a = r() * 2 * Math.PI, L = 170 + Math.pow(r(), 2) * (r() < .15 ? 420 : 210), w = .6 + r() * 2.2;
+    el(rays, 'line', { x1: 600 + 150 * Math.cos(a), y1: 600 + 150 * Math.sin(a), x2: 600 + L * Math.cos(a), y2: 600 + L * Math.sin(a), stroke: '#f4f0ff', 'stroke-width': w, opacity: .18 + r() * .35, 'stroke-linecap': 'round' });
+  }
+  // skyline of minarets and domes
+  const sk = document.getElementById('cv-sky-line'); const q = rng(5);
+  el(sk, 'path', { d: 'M0,1120 L1200,1120 L1200,1800 L0,1800 Z', fill: '#05060b' });
+  let x = 0;
+  while (x < 1200) {
+    const t = q();
+    if (t < .3) { const w = 70 + q() * 60, h = 30 + q() * 30; el(sk, 'path', { d: `M${x},1120 L${x},${1120 - h} A${w / 2},${w / 2} 0 0 1 ${x + w},${1120 - h} L${x + w},1120 Z`, fill: '#05060b' }); x += w + 10; }
+    else if (t < .55) { const h = 130 + q() * 150; el(sk, 'rect', { x, y: 1120 - h, width: 22, height: h, fill: '#05060b' }); el(sk, 'path', { d: `M${x - 3},${1120 - h} L${x + 11},${1120 - h - 40} L${x + 25},${1120 - h} Z`, fill: '#05060b' }); el(sk, 'rect', { x: x - 6, y: 1120 - h * .62, width: 34, height: 8, fill: '#05060b' }); x += 50; }
+    else { const w = 60 + q() * 90, h = 40 + q() * 50; el(sk, 'rect', { x, y: 1120 - h, width: w, height: h, fill: '#05060b' }); if (q() < .5) el(sk, 'rect', { x: x + w * .4, y: 1120 - h * .6, width: 6, height: 9, fill: '#e2a24a', opacity: .8 }); x += w + 4; }
+  }
+})();
+
+// ---------- birth night
+(function () {
+  stars(document.getElementById('b-stars'), 220, 0, 0, 1600, 520, 3);
+  const c = document.getElementById('b-city'), r = rng(9);
+  el(c, 'rect', { x: 880, y: 600, width: 720, height: 70, fill: '#0b0d16' });
+  for (let x = 880; x < 1600; x += 18) el(c, 'rect', { x, y: 590, width: 10, height: 12, fill: '#0b0d16' });
+  [940, 1080, 1230, 1380, 1520].forEach(x => el(c, 'rect', { x, y: 560, width: 44, height: 110, fill: '#0b0d16' }));
+  [[1000, 70], [1160, 90], [1310, 80], [1460, 60]].forEach(([x, w]) => el(c, 'path', { d: `M${x},600 L${x},560 A${w / 2},${w / 2} 0 0 1 ${x + w},560 L${x + w},600 Z`, fill: '#0b0d16' }));
+  [[1120, 220], [1270, 260], [1420, 190]].forEach(([x, h]) => { el(c, 'rect', { x, y: 600 - h, width: 16, height: h, fill: '#0b0d16' }); el(c, 'path', { d: `M${x - 3},${600 - h} L${x + 8},${600 - h - 34} L${x + 19},${600 - h} Z`, fill: '#0b0d16' }); });
+  const svg = document.getElementById('p_birth'); glowDefs(svg, 'b-glow', '#ffa040', 5);
+  for (let i = 0; i < 60; i++) {
+    const x = 885 + r() * 710, y = 586 + (r() < .7 ? 0 : -40 - r() * 160);
+    el(c, 'circle', { cx: x, cy: y, r: 2.5 + r() * 2.5, fill: '#ffb24d', filter: 'url(#b-glow)', opacity: .7 + r() * .3 });
+  }
+  const ar = document.getElementById('b-arches');
+  for (let x = 80; x < 380; x += 40) el(ar, 'path', { d: `M${x},650 L${x},600 C${x},585 ${x + 24},585 ${x + 24},600 L${x + 24},650 Z`, fill: '#1c2238' });
+  figure(document.getElementById('b-astro'), 112, 560, .38, '#0a0d18', { turban: true });
+  const fr = document.getElementById('b-fronds');
+  for (let x = 520; x < 870; x += 14) el(fr, 'line', { x1: x, y1: 664, x2: x + 18, y2: 704 });
+  figure(document.getElementById('b-midwife'), 770, 862, .9, '#0d0a07', {});
+})();
+
+// ---------- procession
+(function () {
+  const cr = document.getElementById('pr-crenel');
+  for (let x = 860; x < 1600; x += 22) el(cr, 'rect', { x, y: 545, width: 12, height: 16 });
+  const g = document.getElementById('pr-proc');
+  const put = (d, x, y, s) => el(g, 'path', { d, transform: `translate(${x},${y}) scale(${s})` });
+  // banners + horsemen in front, then the litter on a camel, then the boy
+  put(HORSE, 820, 640, .9); figure(g, 900, 700, .55, '#120a0e', { turban: true });
+  el(g, 'line', { x1: 885, y1: 560, x2: 880, y2: 700, stroke: '#120a0e', 'stroke-width': 4 }); el(g, 'path', { d: 'M885,560 L940,575 L885,592 Z' });
+  put(HORSE, 650, 640, .9); figure(g, 730, 700, .55, '#120a0e', { turban: true });
+  el(g, 'line', { x1: 720, y1: 545, x2: 716, y2: 700, stroke: '#120a0e', 'stroke-width': 4 }); el(g, 'path', { d: 'M720,545 L780,560 L720,578 Z' });
+  put(CAMEL, 420, 610, 1.0);
+  el(g, 'path', { d: 'M466,654 L556,654 L562,604 C536,584 486,584 460,604 Z' }); // litter
+  el(g, 'path', { d: 'M556,640 L596,636 L596,646 L556,650 Z' }); // protruding feet
+  put(HORSE, 200, 640, .9);
+  figure(g, 285, 700, .5, '#120a0e', { turban: true });
+  el(g, 'ellipse', { cx: 285, cy: 646, rx: 11, ry: 8, fill: '#f6d27a' }); // jewelled turban glint
+  el(g, 'line', { x1: 300, y1: 560, x2: 312, y2: 700, stroke: '#120a0e', 'stroke-width': 3 });
+  for (let i = 0; i < 9; i++) figure(g, 40 + i * 22, 765, .42, '#120a0e', {});
+})();
+
+// ---------- house of wisdom
+(function () {
+  const a = document.getElementById('h-arches');
+  for (let x = 40; x < 1600; x += 260) {
+    el(a, 'path', { d: `M${x},820 L${x},300 C${x},170 ${x + 110},150 ${x + 110},150 C${x + 110},150 ${x + 220},170 ${x + 220},300 L${x + 220},820 Z`, fill: '#2a1d12', stroke: '#6b5134', 'stroke-width': 3 });
+  }
+  const s = document.getElementById('h-shelves'), r = rng(21);
+  for (let bx = 60; bx < 1600; bx += 260) {
+    for (let row = 0; row < 6; row++) {
+      const y = 320 + row * 80;
+      el(s, 'rect', { x: bx + 10, y: y + 60, width: 160, height: 6, fill: '#5d4329' });
+      let x = bx + 14;
+      while (x < bx + 168) { const w = 6 + r() * 12, h = 30 + r() * 26; el(s, 'rect', { x, y: y + 60 - h, width: w, height: h, fill: ['#7a3a28', '#3f5a4a', '#8a6a3a', '#5a3d5e', '#a07a4a'][Math.floor(r() * 5)], opacity: .9 }); x += w + 1.5; }
+    }
+  }
+  const sc = document.getElementById('h-scribes');
+  [[520, 860], [760, 870], [1200, 862], [1420, 870]].forEach(([x, y]) => { kneeling(sc, x, y, 1.1, '#0e0905'); el(sc, 'rect', { x: x + 22, y: y - 40, width: 50, height: 6, fill: '#e9d9b0', transform: `rotate(-8 ${x + 22} ${y - 40})` }); });
+})();
+
+// ---------- supernova
+(function () {
+  stars(document.getElementById('s-stars'), 320, 0, 0, 1600, 660, 17, 1.6);
+  const sc = document.getElementById('s-scorpius');
+  // schematic Scorpius (Antares red), drawn upper right of the nova
+  const P = [[980, 300], [1000, 330], [1030, 360], [1060, 395], [1075, 440], [1068, 490], [1040, 530], [1000, 555], [970, 548], [955, 520], [940, 500]];
+  const head = [[930, 270], [945, 245], [960, 228], [985, 238]];
+  el(sc, 'polyline', { points: P.map(p => p.join(',')).join(' '), fill: 'none', stroke: '#8ea0d0', 'stroke-width': 1.2, opacity: .55 });
+  el(sc, 'polyline', { points: [head[0], [980, 300]].map(p => p.join(',')).join(' ') + ' ' + head.slice(1).map(p => p.join(',')).join(' '), fill: 'none', stroke: '#8ea0d0', 'stroke-width': 1.2, opacity: .45 });
+  P.concat(head).forEach(([x, y], i) => el(sc, 'circle', { cx: x, cy: y, r: i === 1 ? 5 : 2.8, fill: i === 1 ? '#ff7a55' : '#e8eeff' }));
+  el(sc, 'text', { x: 1040, y: 330, 'font-size': 22, fill: '#ffb39a' }, 'قلب العقرب');
+  const sp = document.getElementById('s-spikes');
+  [[0, 160], [90, 160], [45, 70], [135, 70]].forEach(([d, L]) => { const a = d * Math.PI / 180; el(sp, 'line', { x1: 640 - L * Math.cos(a), y1: 560 - L * Math.sin(a), x2: 640 + L * Math.cos(a), y2: 560 + L * Math.sin(a), stroke: '#f2f6ff', 'stroke-width': 2, opacity: .7 }); });
+  // Canopus low in the south-west
+  el(sp, 'circle', { cx: 230, cy: 640, r: 4, fill: '#fff' }); el(sp, 'text', { x: 230, y: 625, 'text-anchor': 'middle', 'font-size': 22, fill: '#dbe3ff' }, 'سُهيل');
+  const pp = document.getElementById('s-people');
+  kneeling(pp, 1040, 790, 1.4, '#05070d'); figure(pp, 1180, 790, .9, '#05070d', {});
+  el(pp, 'path', { d: 'M1168,722 L1110,680 L1114,674 L1176,712 Z', fill: '#05070d' }); // pointing arm
+})();
+
+// ---------- amarna eclipse
+(function () {
+  stars(document.getElementById('a-stars'), 70, 0, 0, 1600, 420, 31, 1.4);
+  const rays = document.getElementById('a-rays'), r = rng(41);
+  for (let i = 0; i < 110; i++) { const a = r() * 2 * Math.PI, L = 90 + Math.pow(r(), 2) * (r() < .2 ? 260 : 140); el(rays, 'line', { x1: 800 + 80 * Math.cos(a), y1: 250 + 80 * Math.sin(a), x2: 800 + L * Math.cos(a), y2: 250 + L * Math.sin(a), stroke: '#f7f3ff', 'stroke-width': .6 + r() * 1.8, opacity: .2 + r() * .35 }); }
+  const ct = document.getElementById('a-court');
+  for (let row = 0; row < 6; row++) {
+    const y = 720 + row * 40, n = 8 + row * 2, w = 1400 + row * 40, x0 = 800 - w / 2, sz = 14 + row * 4;
+    for (let i = 0; i < n; i++) { const x = x0 + (i + .5) * w / n; if (Math.abs(x - 800) < 160 && row > 1) continue; el(ct, 'rect', { x: x - sz / 2, y, width: sz, height: sz * .7, fill: '#5a4636' }); el(ct, 'rect', { x: x - sz / 2, y: y - 3, width: sz, height: 3, fill: '#8a6c50' }); }
+  }
+  const k = document.getElementById('a-king');
+  figure(k, 800, 770, 1.05, '#0c080a', { armsUp: true });
+  el(k, 'path', { d: 'M786,670 C786,640 814,640 814,670 L808,668 L792,668 Z', fill: '#1a2a5a' }); // blue crown
+  figure(k, 860, 770, .85, '#0c080a', {});
+  const cw = document.getElementById('a-crowd');
+  for (let i = 0; i < 18; i++) kneeling(cw, 120 + i * 28 + (i > 8 ? 920 : 0), 905 + (i % 2) * 14, .9, '#140e10');
+})();
+
+// ---------- muqattam
+(function () {
+  stars(document.getElementById('m-stars'), 380, 0, 0, 1600, 680, 51, 1.7);
+  const l = document.getElementById('m-lights'), r = rng(61);
+  for (let i = 0; i < 260; i++) { const x = 20 + r() * 640, y = 720 + Math.pow(r(), .8) * 170; if (x > 560 && y < 760) continue; el(l, 'circle', { cx: x, cy: y, r: .8 + r() * 1.8, fill: r() < .8 ? '#ffc879' : '#fff1cf', opacity: .45 + r() * .55 }); }
+  const d = document.getElementById('m-donkey');
+  el(d, 'path', { d: DONKEY, transform: 'translate(1340,742) scale(.75)', fill: '#3a3540' });
+  el(d, 'line', { x1: 1342, y1: 790, x2: 1320, y2: 820, stroke: '#3a3540', 'stroke-width': 2 });
+  figure(document.getElementById('m-saif'), 905, 838, .95, '#030306', { turban: true });
+  const gh = document.getElementById('m-ghosts');
+  [[1430, 690, .32, '#bfc8e8'], [1462, 694, .3, '#ffd9b0'], [1494, 690, .3, '#ff9b85'], [1526, 694, .32, '#cfd3da'], [1478, 700, .34, '#ffffff']].forEach(([x, y, s, c]) => { const f = figure(gh, x, y, s, c, {}); f.setAttribute('opacity', .55); });
+})();
+</script>
+</body></html>
