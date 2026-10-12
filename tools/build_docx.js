@@ -10,9 +10,10 @@ const {
 
 const S = '/tmp/claude-0/-home-user-eclipse-Novel/1e1a407f-2362-5ae4-8fd5-da30c08b60f1/scratchpad/';
 const OUT = process.argv[2];
-let lines = fs.readFileSync(S + 'novel2.txt', 'utf8').split('\n').filter(l => l.trim()); if (process.env.LIMIT) lines = lines.slice(0, +process.env.LIMIT).concat(lines.filter(l => l.startsWith('@IMG')).slice(5));
+let lines = fs.readFileSync(S + 'novel2.txt', 'utf8').split('\n').filter(l => l.trim()); if (process.env.LIMIT) lines = lines.slice(0, +process.env.LIMIT).concat(lines.filter(l => l.startsWith('@IMG') || l.startsWith('@USERIMG')).slice(5));
 const FNTXT = JSON.parse(fs.readFileSync(S + 'footnotes.json', 'utf8'));
-const IMG = n => fs.readFileSync(S + 'art/jpg/' + n + '.jpg');
+const IMG = n => fs.readFileSync(fs.existsSync(S + 'art/jpg/' + n + '.jpg') ? S + 'art/jpg/' + n + '.jpg' : S + 'user/' + n + '.jpg');
+const UDIM = JSON.parse(fs.readFileSync(S + 'user/dims.json', 'utf8'));
 const FONT = 'Amiri';
 const INK = '2B2118', GOLD = '8A6A3A';
 
@@ -104,6 +105,7 @@ const CAST = [
   ['برجوان', 'الخصيّ الوصيّ على الخليفة الصغير (تاريخيّ)، قُتل سنة ٣٩٠هـ.'],
   ['رُشَيد بن الحسن', 'موظّفٌ ممتازٌ في ديوان الخبر، ضعيفُ البصر، اخترع اسم «بدر البدور».'],
   ['عليّ بن رضوان', 'فتًى في الثامنة عشرة رصد المستعرَ الأعظم سنة ١٠٠٦م (تاريخيّ)، وصار رئيسَ أطبّاء مصر.'],
+  ['الحسن بن الهيثم', 'عالمُ الضوء البصريّ (تاريخيّ). قال للحاكم «لا» مرّتين: في حساب الكسوف، وفي حبس النيل، ثم تظاهر بالجنون عشر سنين.'],
   ['بَخوم', 'شيخٌ قبطيّ من دندرة يحرس المعبدَ المدفون كما حرسه أجدادُه.'],
   ['الخصيّ العجوز', 'رسولُ ستّ الملك، الذي يقف في كلّ منعطفٍ من حياة سيف.'],
   ['الروحانيّات الأربع', 'الزهرة (النحاس)، والمريخ الأحمر (الحديد)، وزحل الرصاصيّ، والمشتري الرماديّ: «طبائعُ» تتجسّد، لا آلهة.'],
@@ -178,6 +180,12 @@ for (const l of lines) {
       inAppendix = true;
       body.push(C(f[1], { size: 36, bold: true, color: '6B4A1A', pageBreak: true, heading: HeadingLevel.HEADING_1, before: 400, after: 300 }));
       continue;
+    case '@USERIMG': {
+      const [w0, h0] = UDIM[f[1]]; let W = TEXT_W_PX, H = Math.round(h0 * W / w0);
+      if (H > 600) { H = 600; W = Math.round(w0 * H / h0); }
+      body.push(...image(f[1], W, H, f[2]));
+      continue;
+    }
     case '@IMG': {
       const [w, h] = fit(f[1]);
       body.push(...image(f[1], w, h, f[2]));
@@ -221,6 +229,16 @@ const TL = [
   ['—', 'سبتمبر ٢٠٢٦ – مايو ٢٠٢٧م', 'جدول المراسيم؛ دندرة؛ جرّة المنيا؛ شهادة الميلاد؛ هامش إسطنبول', 'روائيّ', 'المداخل والفصول ٣٤–٣٥'],
   ['٢٩ صفر ١٤٤٩هـ', '٢ أغسطس ٢٠٢٧م', 'الكسوف الكلّيّ فوق الأقصر: ٣٨٢ ثانية', 'تاريخيّ (فلكيّ) بتفسيرٍ روائيّ', 'الفصول ٣٧–٣٩'],
 ];
+const AD = '٠١٢٣٤٥٦٧٨٩';
+const toN = t => +t.replace(/[٠-٩]/g, c => AD.indexOf(c));
+const toA = n => String(n).replace(/\d/g, d => AD[d]);
+TL.forEach(r => { if (/^الفص/.test(r[4])) r[4] = r[4].replace(/[٠-٩]+/g, m => { const n = toN(m); return toA(n >= 21 ? n + 1 : n); }); });
+const ins = (afterPrefix, row) => { const i = TL.findIndex(r => r[2].startsWith(afterPrefix)); TL.splice(i + 1, 0, row); };
+ins('ابن يونس يجد', ['٣٨٩هـ', '٩٩٩م', 'الحاكم يكتب إلى ابن الهيثم في البصرة يسأله حساب الكسوف، فيرفض: «خادمُ الضوء لا خادمُ الظلّ»؛ ويقبل ابنُ يونس', 'روائيّ بشخصٍ تاريخيّ', 'الفصل ٢']);
+ins('هدم كنيسة', ['٤٠٠هـ', '١٠١٠م', 'ابن الهيثم في مصر: لقاء الخندق، ورحلة الجنادل، وفشلُ مشروع النيل، ثم الجنون المصطنع حتى غياب الحاكم', 'تاريخيّ', 'الفصل ٢١']);
+ins('ابن الهيثم في مصر', ['٤٠٠هـ', '١٠١٠م', 'سيف يلقى ابن الهيثم في الأشمونين: بدرُ البدور، ووجهُ القمر، والنيّةُ الخفيّة لحبس النيل', 'روائيّ بشخصٍ تاريخيّ', 'الفصل ٢١']);
+ins('ستّ الملك تدير', ['٤١١هـ', '١٠٢١م', 'ابن الهيثم يُظهر عقله، ويسكن عند الأزهر، ويكتب «في كيفيّة الأرصاد»', 'تاريخيّ', 'الفصل ٣٤']);
+TL.forEach(r => { if (r[2].startsWith('حجرة المأمون')) r[2] = 'حجرة المأمون: الحساب يقع في ٢٩ صفر ١٤٤٩؛ خسوف القمر و«العلامة»؛ العودة إلى القاهرة'; });
 const colW = [1500, 1300, 2400, 900, 1000]; // twips (sum 7100? keep within text width)
 const TW = PAGE_W - M.left - M.right; // 6640
 const scale = TW / colW.reduce((a, b) => a + b, 0);
@@ -244,7 +262,7 @@ const appendixTL = [
 ];
 const appendixImages = [
   C('ملحق: فهرس الرسوم', { size: 36, bold: true, color: '6B4A1A', pageBreak: true, heading: HeadingLevel.HEADING_1, before: 200, after: 240 }),
-  ...lines.filter(l => l.startsWith('@IMG')).map((l, i) => P((i + 1).toLocaleString('ar-EG') + '. ' + l.split('|')[2], { size: 22, noIndent: true, after: 90, line: 290 })),
+  ...lines.filter(l => l.startsWith('@IMG') || l.startsWith('@USERIMG')).map((l, i) => P((i + 1).toLocaleString('ar-EG') + '. ' + l.split('|')[2], { size: 22, noIndent: true, after: 90, line: 290 })),
   P('جميع الرسوم أُعدّت خصّيصًا لهذه الطبعة. والمشاهدُ التاريخيّة فيها تصوّرٌ فنّيٌّ لا وثيقة، والرسومُ الفلكيّة والخرائطُ تقريبيّةٌ للتوضيح.', { size: 21, italics: true, noIndent: true, before: 200 }),
 ];
 
