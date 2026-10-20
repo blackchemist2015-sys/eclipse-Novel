@@ -32,7 +32,7 @@ const cell = (paras, shade) => new TableCell({ width: { size: CW, type: WidthTyp
 const wc = s => s.lines.join(' ').split(/\s+/).filter(Boolean).length;
 const body = [];
 // report
-body.push(P('مقارنة بين النصّين: «أرصادٌ وأَطْوار» قبل المراجعة وبعدها بأسلوب «عزازيل»', { size: 36, bold: true, align: AlignmentType.CENTER, color: '6B4A1A', heading: HeadingLevel.HEADING_1, after: 200 }));
+body.push(P('مقارنة بين النصّين: «أرصادٌ وأَطْوار» — نسخة المؤلّف وما بعد المراجعة', { size: 36, bold: true, align: AlignmentType.CENTER, color: '6B4A1A', heading: HeadingLevel.HEADING_1, after: 200 }));
 for (let l of fs.readFileSync(REP, 'utf8').split('\n')) {
   if (!l.trim()) continue;
   const h = l.match(/^(#+)\s*(.*)/);

@@ -1,0 +1,39 @@
+# Revision brief 6 (binding)
+
+You edit ONE chunk: `rw6/in/<X>.txt` → `rw6/out/<X>.txt` (+ `rw6/out/<X>_fn.json` for new footnotes; keys lowercase `<x>6_…`). The whole novel is in `rw6/full_novel_readonly.txt` for context (read-only); existing footnotes in `rw6/footnotes_current.json`.
+
+## Fixed rules (do not break)
+- Narration: the editor Yunus Karam narrates in third person about Saif (Saif is the axis, not the narrator); Saif's voice only in short quotes from his leaves. Dialogue in the Fatimid and Akhenaten eras is modern standard Arabic (no colloquial). Modern-era dialogue (Yunus, the security service, «سموّه») may be colloquial.
+- The author hand-edited this text; keep his wording outside the places you touch.
+- Keep every `#`/`@` line and every `⟦fn:key⟧` marker. One paragraph per line. Chapter-ending hooks stay last.
+- Every NEW scientific/historical term you introduce gets a footnote at its first occurrence (unless an existing footnote already defines it earlier in the book).
+- Length: you may grow your chunk by up to +12% for the new material.
+
+## New author requests and who does what
+
+1. **Recurring refrain (ALL chunks):** introduce, once per chunk (A–G), at a fitting moment, a refrain in the editor's voice, worded almost identically each time so it becomes a motif:
+   «ولن أقول لك كيف؛ فمن فعلها يعرف، ومن لم يفعلها فلن يفيده الوصف.»
+   (verbs may agree with the context, e.g. «فمن رآه يعرف، ومن لم يره فلن يفيده الوصف» — but keep the shape). Good places: something intimate, secret, sensory or initiatory — a first kiss, entering the pyramid passage, opening the inkwell's false bottom, the moment of totality (G), a night on the river.
+
+2. **Night scenes of desire seen by al-Hakim → the ban on prostitution (chunks A and B):** the author asks for sensual scenes «بتفصيل لجذب القارئ… على طريقة نجيب محفوظ». Write them in Mahfouz's manner: sensual, warm, suggestive, rich in atmosphere (lamplight, perfume, the lute, wine, a roof under Venus or Mars), psychologically sharp, with irony — explicit anatomy and graphic sex acts are NOT Mahfouz's way and must not appear; the charge comes from gesture, glance, breath, the door half-closed, what the narrator declines to say (the refrain fits here). All participants are adults. 
+   - Chunk A (ch. 4, al-Hakim's first night ride after Barjawan's death): on a rooftop/garden under Venus he glimpses a singing-girl (قَيْنة) and a merchant; one scene.
+   - Chunk B (ch. 5–10): one or two more scenes on his night rides (a house of pleasure near the Nile shore, a boat under Mars; or a lovers' meeting under the planets) — and their consequence: al-Hakim, who reads every sign as aimed at him, issues decrees closing the houses of prostitution and pleasure (البغاء), banning singing-girls and wine, and finally forbidding women to go out at night (which the text already has) — link to «بدر البدور». Historical fact (footnote): al-Hakim did issue edicts against wine, singing-girls and immoral gatherings, and confined women to their houses (from c. 405هـ); keep dates consistent with the novel's chronology, and say in the footnote what is history and what is the novel.
+
+3. **The rebel of Upper Egypt who watched Saif for years (chunks C, D, E):** Historical: أبو ركوة الوليد بن هشام, an Umayyad pretender who rose against al-Hakim in 395هـ with Bedouin support (بنو قُرّة in Barqa), defeated Fatimid armies, reached the Fayyum and Giza, was routed, fled south toward Nubia, was handed over and executed in 397هـ (footnote). In the novel: one of his men in the Sa'id — invent «عامر القُرّيّ», a quiet, patient Bedouin — survives the revolt and goes on watching Saif for years, because he believes Saif carries «the secret of the South» that could break al-Hakim. He explains the unexplained watchers already in the text: the lamp on the Dendera roof (ch. 17, chunk C), the man writing names in the khan at al-Ashmunein (ch. 21, chunk D), possibly the informer at Qena. Chunk C introduces him (and the revolt) as Saif arrives in the Sa'id in 395–396; chunk D reveals him (Saif meets/understands him; he offers alliance against the Caliph; Saif refuses); chunk E closes his thread (he appears once near the pyramid in 403 or disappears with a last gesture). Keep it tight.
+
+4. **Sirius (chunk C):** in Qena/Dendera Saif observes the heliacal rising of الشعرى اليمانية (Sirius) at dawn in summer (Abib/أبيب; in Upper Egypt it rises earlier than in Cairo — a fact he notes) and remembers his master's treatise «بلوغ الأمنية بما يتعلّق بطلوع الشعرى اليمانية» (a real work attributed to Ibn Yunus: prognostications for the year by the weekday on which Sirius rises in the Coptic month Abib). He reads the year's prognostication with irony and records the rising time with precision — «الأحكامُ ظنٌّ والرصدُ يقين». Footnotes: Sirius & heliacal rising (and its role in the Egyptian calendar / Nile flood); the treatise.
+
+5. **A reason for Saif to visit the sites in the Sa'id (chunks C and D):** give him a concrete scholarly motive besides fleeing: Ibn Yunus's instruction to verify the latitude of Upper Egypt and the rising of Sirius at Qena/Aswan for the zij, plus the Dendera scroll (bought by Ibn Yunus at Dendera) which names Dendera, «the tombs of the princes» (Beni Hasan) and «the city built for a shadow» (Akhet-Aten) — so each stop has a reason. Chunk C sets it up; chunk D pays it off at Beni Hasan and Amarna.
+
+6. **The prophecy complete at its first appearance (chunk A):** the author inserted at its first appearance (in the Part 1 diary) the line «إذا استسرَّ القمرُ في الشهر الثاني، ووقف بين العينِ والنور، انفتحت ثُغرةٌ قدرُ نَفَسٍ واحد. يخرج منها مَن عَدَدُهُ عددُ صاحبِ الأمر. فإن كانا اثنين، لم يبقَ إلا واحد.» Gather ALL other clauses of the prophecy scattered in the novel (search full_novel_readonly.txt: the epigraph «ولا تُفتَحُ الثُّغرةُ إلا مرّةً، ولا يَعبُرُها إلا مَن عَدَدُهُ عَدَدُ صاحِبِها», «ويُعرَف زمانُه بأنّ الكوكبَ الدُّرِّيَّ يقوم في العقرب ولا يبرح», «يقف فيه المرءُ قدرَ نَفَسٍ ثم يخرج», the Dendera ceiling / Cancer clause, etc.) and present the WHOLE prophecy there, in one coherent, solemn text (keep the author's line as its opening), so later chapters re-quote pieces of a text the reader already knows. Do not change the later quotations.
+
+7. **Ibn Yunus as al-Musabbihi described him (chunk A, where Ibn Yunus is first portrayed, ch. 2):** quote verbatim (historical, transmitted by Ibn Khallikan from المسبّحي): «كان ابنُ يونس المذكور أبلهَ مغفَّلًا، يعتمّ على طرطورٍ طويلٍ ويجعل رداءه فوق العمامة، وكان طويلًا، وإذا ركب ضحك منه الناسُ لشهرته وسوء حاله ورثاثة لباسه، وكان له مع هذه الهيئة إصابةٌ بديعةٌ غريبة في النجامة لا يشاركه فيها غيره.» and «وكان قد أفنى عمره في الرصد والتسيير للمواليد، وعمل فيها ما لا نظير له، وكان يقف للكواكب.» Weave it with the editor's ironic commentary (the gap between appearance and accuracy — a perfect satire of how cities judge their geniuses). Footnotes: المسبّحي (d. 420هـ, Fatimid chronicler, «أخبار مصر»); التسيير (a technique of directions in nativities); «يقف للكواكب».
+
+8. **Ibn Yunus's poem (chunk D, ch. 20 — his death or his papers):** Saif finds among his master's papers these verses in his hand (historical, quoted by Ibn Khallikan as Ibn Yunus's own), and the editor leaves their beloved a mystery:
+   أُحمِّلُ نَشْرَ الريحِ عند هبوبِه … رسالةَ مشتاقٍ لوجهِ حبيبِه
+   بنفسيَ مَن تحيا النفوسُ بقُربِه … ومَن طابتِ الدنيا به وبطيبِه
+   لَعَمري لقد عطّلتُ كأسي بعدَه … وغيّبتُها عنّي لطولِ مغيبِه
+   وجدّدَ وجدي طائفٌ منه في الكَرى … سرى مَوهِنًا في خِفيةٍ من رقيبِه
+   (render as a centred verse block: each verse on its own line, hemistichs separated by « … »). Footnote: source (Ibn Khallikan, وفيات الأعيان) and two glosses (نَشْر الريح، مَوهِنًا).
+
+Finish with a check script (markup lines, markers, new keys defined, no colloquial in historical dialogue, word count) and reply ≤120 words listing the new names/facts other chunks must know.
