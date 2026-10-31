@@ -8,7 +8,7 @@ const {
   BorderStyle, ShadingType, CharacterSet, SectionType, LineRuleType,
 } = d;
 
-const S = '/tmp/claude-0/-home-user-eclipse-Novel/1e1a407f-2362-5ae4-8fd5-da30c08b60f1/scratchpad/';
+const S = (process.env.NOVEL_WORK || '/home/user/novel-work') + '/';
 const OUT = process.argv[2];
 let lines = fs.readFileSync(S + 'novel2.txt', 'utf8').split('\n').filter(l => l.trim()); if (process.env.LIMIT) lines = lines.slice(0, +process.env.LIMIT).concat(lines.filter(l => l.startsWith('@IMG') || l.startsWith('@USERIMG')).slice(5));
 const FNTXT = Object.assign(JSON.parse(fs.readFileSync(S + 'footnotes.json', 'utf8')), JSON.parse(fs.readFileSync(S + 'primer_fn.json', 'utf8')));
