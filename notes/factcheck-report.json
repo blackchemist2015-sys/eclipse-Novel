@@ -1,0 +1,135 @@
+[
+ {
+  "key": "t5_sitt",
+  "problem": "Sitt al-Mulk died 413 AH (Feb 1023), not 415; contradicts f_zahir which correctly gives 413.",
+  "severity": "error",
+  "old_ar": "(٣٥٩–٤١٥هـ/٩٧٠–١٠٢٣م)",
+  "fix_ar": "(٣٥٩–٤١٣هـ/٩٧٠–١٠٢٣م)"
+ },
+ {
+  "key": "khusuf",
+  "problem": "Wrong dates: 14 Mar and 7 Sep 980 were not new moons, so no solar eclipse fell on them. The real solar eclipses of 980 were around 17 Apr, 17 May and 11 Oct. The novel's text also refers to lunar eclipses (خسوفين) in 369 and 370 AH; the lunar eclipses visible from Cairo were 6 Nov 979, 3 May 980 and 22 Apr 981 (checked with PyEphem).",
+  "severity": "error",
+  "old_ar": "وطبقًا لأرشيف الكسوفات والخسوفات فقد وقع في سنة ٩٨٠م (٣٦٩–٣٧٠هـ) كسوفان للشمس: الأوّل في ١٤ مارس ٩٨٠م، والثاني في ٧ سبتمبر ٩٨٠م.",
+  "fix_ar": "وفي سنتي ٣٦٩ و٣٧٠هـ (٩٧٩–٩٨١م) وقعت خسوفاتٌ للقمر أمكن رؤيتُها من مصر، منها خسوفُ ٦ نوفمبر ٩٧٩م (ربيع الآخر ٣٦٩هـ)، وخسوفُ ٣ مايو ٩٨٠م (شوّال ٣٦٩هـ)، وخسوفُ ٢٢ أبريل ٩٨١م (شوّال ٣٧٠هـ)."
+ },
+ {
+  "key": "amajur",
+  "problem": "Muflih ibn Yusuf was the mawla of the son, Abu al-Hasan Ali, not of Abu al-Qasim (Ibn Yunus's wording; see the BEA entry on the Amajur family).",
+  "severity": "clarify",
+  "old_ar": "ومولاه مُفلِح بن يوسف",
+  "fix_ar": "ومُفلِح بن يوسف مولى ابنه أبي الحسن"
+ },
+ {
+  "key": "a_ecl993",
+  "problem": "20 Aug 993 (Julian) was a Sunday, not a Monday. Under the Fatimid tabular calendar (Thursday epoch), 29 Jumada II 383 = Sunday 20 Aug. The novel's text (يوم الاثنين التاسع والعشرين من جمادى الآخرة) needs the same change.",
+  "severity": "error",
+  "old_ar": "يوم الإثنين ٢٩ جمادى الآخرة ٣٨٣هـ",
+  "fix_ar": "يوم الأحد ٢٩ جمادى الآخرة ٣٨٣هـ"
+ },
+ {
+  "key": "b6_planets",
+  "problem": "Checked with PyEphem: Mars (Libra 10°, 120° W of the Sun) rose at Cairo about 22:00 local time, i.e. about two hours before midnight. The Venus–Mars conjunction (~1° apart) fell on about 1–3 Dec 1004 = mid-Safar 395; by late Safar (mid-Dec) they were 4–5° apart. So 'آخر صفر' does not match 'أوائل ديسمبر'.",
+  "severity": "clarify",
+  "old_ar": "فيطلع من الأفق الشرقيّ نحو منتصف الليل. وفي آخر صفر ٣٩٥هـ (أوائل ديسمبر ١٠٠٤م) كانت الزهرةُ والمرّيخ متقاربين جدًّا في سماء المساء الغربيّة بعد غروب الشمس.",
+  "fix_ar": "فيطلع من الأفق الشرقيّ قبل منتصف الليل بنحو ساعتين. وفي منتصف صفر ٣٩٥هـ (أوائل ديسمبر ١٠٠٤م) اقترنت الزهرةُ والمرّيخ في سماء المساء الغربيّة بعد غروب الشمس، فلم يكن بينهما إلا نحوُ درجة، وبقيا متقاربين إلى آخر الشهر."
+ },
+ {
+  "key": "ibn_ridwan",
+  "problem": "Inconsistent: the Mustansirid famine (al-Shidda) ran from about 457/1065 to 464/1072, so a death 'c. 1061' cannot fall in it. Sources give 453/1061 or 460/1068.",
+  "severity": "error",
+  "old_ar": "وتوفّي في الشدّة المستنصرية نحو ١٠٦١م)",
+  "fix_ar": "وتوفّي سنة ٤٥٣هـ/١٠٦١م، وقيل سنة ٤٦٠هـ/١٠٦٨م في الشدّة المستنصرية)"
+ },
+ {
+  "key": "t5_amun",
+  "problem": "Tutankhaten was not Akhenaten's immediate successor; Smenkhkare/Neferneferuaten reigned in between.",
+  "severity": "clarify",
+  "old_ar": "فغيّر خليفتُه توت عنخ آتون اسمَه",
+  "fix_ar": "فغيّر توت عنخ آتون، أحدُ خلفائه، اسمَه"
+ },
+ {
+  "key": "moon_marks",
+  "problem": "Usual title is «في الأثر الذي في وجه القمر» (as in the ibn_haytham footnote); make the two footnotes match.",
+  "severity": "clarify",
+  "old_ar": "«في الأثر الظاهر في وجه القمر»",
+  "fix_ar": "«في الأثر الذي في وجه القمر»"
+ },
+ {
+  "key": "casing",
+  "problem": "Some casing stones are still in place at the base of the Great Pyramid (north side), not only near Khafre's summit.",
+  "severity": "clarify",
+  "old_ar": "ولم يبقَ من الكساء في موضعه اليوم إلا بقيّةٌ قرب قمّة هرم خفرع.",
+  "fix_ar": "ولم يبقَ من كساء الهرم الأكبر في موضعه اليوم إلا أحجارٌ قليلة عند قاعدته، وتبقى بقيّةٌ ظاهرةٌ من كساء هرم خفرع قرب قمّته."
+ },
+ {
+  "key": "c6_bulugh",
+  "problem": "The title as cited in bibliographies is «بلوغ الأمنية فيما يتعلّق بطلوع الشعرى اليمانية».",
+  "severity": "clarify",
+  "old_ar": "«بلوغ الأمنية بما يتعلّق",
+  "fix_ar": "«بلوغ الأمنية فيما يتعلّق"
+ },
+ {
+  "key": "basin",
+  "problem": "Attribution uncertain: the first-person observing reports in the Hakimi Zij that mention his son Abu al-Hasan and Muflih belong to Ibn Amajur, whom Ibn Yunus quotes. Water-reflection observing is attested in the zij, but the quoted sentence should not be presented as certainly Ibn Yunus's own words.",
+  "severity": "doubtful",
+  "old_ar": "طريقةٌ نصّ عليها ابنُ يونس نفسُه في زيجه («ورصدناها بالماء رصدًا محكمًا»)",
+  "fix_ar": "طريقةٌ مذكورةٌ في الأرصاد التي يوردها ابنُ يونس في زيجه («ورصدناها بالماء رصدًا محكمًا»)"
+ },
+ {
+  "key": "appendix",
+  "problem": "Abjad: «المنصور» = 417; only «منصور» without the article = 40+50+90+6+200 = 386.",
+  "severity": "error",
+  "old_ar": "واسمه المنصور، وعددُه بالجُمَّل ٣٨٦: سنةُ بيعته.",
+  "fix_ar": "واسمه المنصور، وعددُ «منصور» بلا أداة التعريف بالجُمَّل ٣٨٦: سنةُ بيعته."
+ },
+ {
+  "key": "appendix",
+  "problem": "SN 1006 date: 30 Apr 1006 fell at the very end of Rajab 396 (28–29 Rajab tabular), not 17 Sha'ban. Arabic chronicles (Ibn al-Jawzi, Ibn al-Athir) put the first sighting at the start of Sha'ban 396; the Chinese record gives 1 May. The novel's 'مساء الخميس السابع عشر من شعبان' and the image caption share this error (30 Apr 1006 was a Tuesday).",
+  "severity": "error",
+  "old_ar": "وفي ١٧ شعبان ٣٩٦هـ/٣٠ أبريل ١٠٠٦م ظهر",
+  "fix_ar": "وفي مستهلّ شعبان ٣٩٦هـ/آخر أبريل وأوّل مايو ١٠٠٦م ظهر"
+ },
+ {
+  "key": "appendix",
+  "problem": "Misattribution: the report 'رصدتُ هذا الكسوف أنا وابني أبو الحسن ومفلح' belongs to Ibn Amajur in Baghdad (his son Abu al-Hasan Ali and Muflih, the son's mawla), quoted by Ibn Yunus. They were not Ibn Yunus's partners.",
+  "severity": "error",
+  "old_ar": "• الرصدُ في الماء: «قد رصدتُ هذا الكسوف أنا وابني أبو الحسن ومُفلِح… ورصدناها بالماء رصدًا محكمًا، فانجلت فلم يبقَ فيها من الكسوف شيء.» أي يُنظَر إلى صورة الشمس في طَستٍ من ماء، لا إليها.",
+  "fix_ar": "• الرصدُ في الماء: وفيما ينقله ابنُ يونس من أرصاد ابن أماجور ببغداد: «قد رصدتُ هذا الكسوف أنا وابني أبو الحسن ومُفلِح…»، ومن هذا الباب: «ورصدناها بالماء رصدًا محكمًا، فانجلت فلم يبقَ فيها من الكسوف شيء.» أي يُنظَر إلى صورة الشمس في طَستٍ من ماء، لا إليها."
+ },
+ {
+  "key": "appendix",
+  "problem": "Same confusion: in the zij, Abu al-Hasan and Muflih were Ibn Amajur's son and the son's mawla. Ibn Yunus was himself Abu al-Hasan.",
+  "severity": "error",
+  "old_ar": "وشريكاه في الرصد: ابنُه أبو الحسن، ومولًى اسمه مُفلِح، استعرتُ اسمَه للرواية ولا أعرف عنه إلا أنّه كان هناك.",
+  "fix_ar": "أمّا مُفلِح فاسمُه مستعارٌ من أرصاد بني أماجور التي ينقلها ابنُ يونس: كان مولًى لأبي الحسن بن أماجور يشاركه وأباه الرصدَ ببغداد، ولا أعرف عنه إلا أنّه كان هناك؛ فجعلتُه في الرواية مولًى لابن يونس."
+ },
+ {
+  "key": "appendix",
+  "problem": "I could not find this phrase in the Great Hymn to the Aten (tomb of Ay). The hymn calls Aten 'the living Aten, beginning of life', but «أنت الحيّ الذي لا يموت» does not appear to be a quotation from it. Hedge it.",
+  "severity": "doubtful",
+  "old_ar": "وترنيمةُ آتون منقوشةٌ في مقبرة آي، وفيها: «أنت الحيُّ الذي لا يموت.»",
+  "fix_ar": "وترنيمةُ آتون الكبرى منقوشةٌ في مقبرة آي، وفيها يُخاطَب آتون بـ«الحيّ» الذي هو بدءُ الحياة؛ أمّا صيغة «أنت الحيّ الذي لا يموت» فمن صياغة الرواية."
+ },
+ {
+  "key": "appendix",
+  "problem": "Not verifiable: the appendix calls this self-correction verbatim from the zij, while footnote u12_kd_la says the manuscript reads only «كد لا», which is ambiguous. Present it as a reading, not a quotation.",
+  "severity": "doubtful",
+  "old_ar": "«على أنه في العقرب ٢٤ — لا — فوجدته في العقرب ٢٥.»",
+  "fix_ar": "«على أنه في العقرب كد لا…»، وأقرؤه — على أحد وجهيه — «٢٤، لا»، ثم يُثبت ما وجده بعدُ (انظر حاشية «كد لا»)"
+ },
+ {
+  "key": "primer",
+  "problem": "The Intellect→Universal Soul scheme belongs to earlier Ismaili da'is (al-Nasafi, al-Sijistani). Al-Kirmani's «راحة العقل» is known for replacing the Soul with a system of ten intellects, so it does not 'best explain' the Soul scheme.",
+  "severity": "error",
+  "old_ar": "يبدأ من المبدِع، ثم العقل الأوّل، ثم النفس الكلّيّة، ثم الأفلاك، حتى يبلغ عالمَ الكون والفساد الذي نعيش فيه. وأوضحُ ذلك كتابُ «راحة العقل» لحميد الدين الكرمانيّ⟦fn:kirmani⟧، وهو من كبار دعاة الحاكم نفسه. وفيه عشرةُ عقولٍ تقابل الأفلاك: الفلكَ المحيط، وفلكَ الكواكب الثابتة، وأفلاكَ الكواكب السبعة.",
+  "fix_ar": "يبدأ عند الدعاة الأوائل كالنسفيّ والسجستانيّ من المبدِع، ثم العقل الأوّل، ثم النفس الكلّيّة، ثم الأفلاك، حتى يبلغ عالمَ الكون والفساد الذي نعيش فيه. ثم جاء حميد الدين الكرمانيّ⟦fn:kirmani⟧، وهو من كبار دعاة الحاكم نفسه، فجعل في كتابه «راحة العقل» مكانَ النفس الكلّيّة سلسلةً من عشرة عقول، تتّصل بالأفلاك: الفلكِ المحيط، وفلكِ الكواكب الثابتة، وأفلاكِ الكواكب السبعة، وآخرُها العقلُ العاشر المدبِّر لعالمنا."
+ },
+ {
+  "key": "primer",
+  "problem": "Ibn Yunus's eclipses were first used for the Earth's slowing by 19th-century astronomers (Newcomb), then in the 20th (Fotheringham, Stephenson). Footnote earth_rot says 19th century; make them consistent.",
+  "severity": "clarify",
+  "old_ar": "حسب علماءُ القرن العشرين تباطؤَ دوران الأرض",
+  "fix_ar": "حسب علماءُ القرنين التاسع عشر والعشرين تباطؤَ دوران الأرض"
+ }
+]

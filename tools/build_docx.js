@@ -89,9 +89,7 @@ front.push(C(epi[0], { size: 34, italics: true, after: 40 }));
 front.push(C(epi[1], { size: 34, italics: true, after: 200 }));
 front.push(C(epi[2], { size: 22, color: GOLD }));
 // contents
-front.push(new Paragraph({ children: [new PageBreak()] }));
-front.push(C('المحتويات', { size: 40, bold: true, after: 300, color: '6B4A1A' }));
-front.push(new TableOfContents('المحتويات', { hyperlink: true, headingStyleRange: '1-2' }));
+// (table of contents moved to the end of the book — see TOC_JSON)
 // =============================================================== BODY
 const body = [];
 let first = true, pendingBreak = false, inAppendix = false;
@@ -238,7 +236,7 @@ const TL = [
   ['٣٩٥هـ', '١٠٠٥م', 'سِجِلّات قتل الكلاب ومنع الملوخيّة والسمك بلا قشر وخروج النساء ليلًا', 'تاريخيّ بتعليلٍ روائيّ', 'الفصول ٧–٩'],
   ['جمادى الآخرة ٣٩٥هـ', 'مارس ١٠٠٥م', 'افتتاح دار الحكمة؛ المشتري بين الرفوف', 'تاريخيّ / روائيّ', 'الفصل ١٠'],
   ['١٥ رجب – ٢٩ شوّال ٣٩٥هـ', 'صيف ١٠٠٥م', 'ليلة البستان؛ وشاية خالد؛ خزانة البنود وليلة المريخ؛ الهرب في النيل', 'روائيّ', 'الفصول ١١–١٤'],
-  ['١٧ شعبان ٣٩٦هـ', '٣٠ أبريل ١٠٠٦م', 'المستعر الأعظم في العقرب، يرصده عليّ بن رضوان', 'تاريخيّ', 'الفصل ١٦'],
+  ['مستهلّ شعبان ٣٩٦هـ', 'آخر أبريل – أوّل مايو ١٠٠٦م', 'المستعر الأعظم في العقرب، يرصده عليّ بن رضوان', 'تاريخيّ', 'الفصل ١٦'],
   ['٣٩٦–٣٩٧هـ', '١٠٠٦–١٠٠٧م', 'سراديب دندرة وكسوفا السقف: «العلامة» الأولى؛ بني حسن وشهادة مُراقِب الساعات', 'روائيّ', 'الفصول ١٧–١٩'],
   ['٣ شوّال ٣٩٩هـ', '٣١ مايو ١٠٠٩م', 'موت ابن يونس؛ «البابُ الثاني والثمانون» الذي لا وجود له', 'تاريخيّ / روائيّ', 'الفصل ٢٠'],
   ['ذو القعدة ٣٩٩هـ', 'يوليو ١٠٠٩م', 'مجلسُ الحَرف: الزيج يُقرأ على الحاكم؛ ظهور زحل في الصحراء', 'روائيّ', 'الفصل ٢٠'],
@@ -299,6 +297,21 @@ const appendixTL = [
   C('ملحق: الخطّ الزمنيّ المفصّل', { size: 36, bold: true, color: '6B4A1A', pageBreak: true, heading: HeadingLevel.HEADING_1, before: 200, after: 240 }),
   table,
 ];
+// static table of contents at the end (page numbers measured from a rendered PDF)
+const tocEnd = [];
+if (process.env.TOC_JSON && fs.existsSync(process.env.TOC_JSON)) {
+  const toc = JSON.parse(fs.readFileSync(process.env.TOC_JSON, 'utf8'));
+  tocEnd.push(C('المحتويات', { size: 36, bold: true, color: '6B4A1A', pageBreak: true, before: 200, after: 240 }));
+  const nb = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+  const tw = PAGE_W - M.left - M.right, pw = 900;
+  const tc = (kids, w) => new TableCell({ width: { size: w, type: WidthType.DXA }, borders: { top: nb, bottom: nb, left: nb, right: nb }, margins: { top: 10, bottom: 10, left: 40, right: 40 }, children: kids });
+  const rows = toc.map(([lvl, label, page]) => new TableRow({ cantSplit: true, children: [
+    tc([new Paragraph({ bidirectional: true, alignment: AlignmentType.RIGHT, indent: { right: lvl === 2 ? 360 : 0 }, spacing: { before: lvl === 1 ? 120 : 0, after: 30, line: 260 },
+      children: [new TextRun({ text: label, rightToLeft: true, font: FONT, size: lvl === 1 ? 23 : 21, bold: lvl === 1, color: lvl === 1 ? '6B4A1A' : INK })] })], tw - pw),
+    tc([new Paragraph({ bidirectional: true, alignment: AlignmentType.LEFT, spacing: { before: lvl === 1 ? 120 : 0, after: 30, line: 260 },
+      children: [new TextRun({ text: page ? String(page).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]) : '', rightToLeft: true, font: FONT, size: 21, color: INK })] })], pw)] }));
+  tocEnd.push(new Table({ width: { size: tw, type: WidthType.DXA }, columnWidths: [tw - pw, pw], visuallyRightToLeft: true, rows }));
+}
 const appendixImages = [
   C('ملحق: فهرس الرسوم', { size: 36, bold: true, color: '6B4A1A', pageBreak: true, heading: HeadingLevel.HEADING_1, before: 200, after: 240 }),
   ...lines.filter(l => l.startsWith('@IMG') || l.startsWith('@USERIMG')).map((l, i) => P((i + 1).toLocaleString('ar-EG') + '. ' + l.split('|')[2], { size: 22, noIndent: true, after: 90, line: 290 })),
@@ -328,7 +341,7 @@ const doc = new Document({
     { properties: { page: { size: { width: PAGE_W, height: PAGE_H }, margin: { top: 0, bottom: 0, left: 0, right: 0, header: 0, footer: 0 } } },
       children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [new ImageRun({ type: 'jpg', data: IMG('cover'), transformation: { width: 576, height: 863 }, altText: { title: 'الغلاف', description: 'غلاف رواية أرصاد وأطوار', name: 'cover' } })] })] },
     { properties: Object.assign({ type: SectionType.NEXT_PAGE }, pageProps), children: front },
-    { properties: Object.assign({ type: SectionType.NEXT_PAGE, page: { size: { width: PAGE_W, height: PAGE_H }, margin: M, pageNumbers: { start: 1 } } }), headers: { default: header }, footers: { default: footer }, children: body.concat(back, appendixTL, appendixImages) },
+    { properties: Object.assign({ type: SectionType.NEXT_PAGE, page: { size: { width: PAGE_W, height: PAGE_H }, margin: M, pageNumbers: { start: 1 } } }), headers: { default: header }, footers: { default: footer }, children: body.concat(back, appendixTL, appendixImages, tocEnd) },
   ],
 });
 Packer.toBuffer(doc).then(buf => { fs.writeFileSync(OUT, buf); console.log('written', OUT, (buf.length / 1e6).toFixed(1) + ' MB', 'footnotes:', fnNext - 1); });
