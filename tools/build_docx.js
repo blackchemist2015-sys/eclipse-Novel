@@ -77,8 +77,8 @@ function fit(name, maxW = TEXT_W_PX, maxH = 560) {
 const front = [];
 // title page
 front.push(...blank(6));
-front.push(C('أرصادٌ وأَطْوار', { size: 76, bold: true, color: '6B4A1A', after: 120 }));
-front.push(C('سِرُّ الحاكم — ثُغْرَةُ الكُسوف', { size: 36, after: 300 }));
+front.push(C('ظل الحاكم', { size: 76, bold: true, color: '6B4A1A', after: 120 }));
+front.push(C('و ثُغْرَةُ الكُسوف', { size: 36, after: 300 }));
 front.push(C('رواية', { size: 30, color: GOLD, after: 1600 }));
 front.push(C('مع رسومٍ توضيحيّة، وخطٍّ زمنيّ، وهوامشَ علميّة', { size: 22, italics: true, color: '5A4A3A' }));
 // epigraph page
@@ -323,10 +323,10 @@ const font = fs.readFileSync(S + 'fonts/Amiri-Regular.ttf');
 const fontB = fs.readFileSync(S + 'fonts/Amiri-Bold.ttf');
 const pageProps = { page: { size: { width: PAGE_W, height: PAGE_H }, margin: M } };
 const footer = new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ children: [PageNumber.CURRENT], font: FONT, size: 20, color: GOLD })] })] });
-const header = new Header({ children: [new Paragraph({ bidirectional: true, alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'أرصادٌ وأَطْوار', rightToLeft: true, font: FONT, size: 18, italics: true, color: GOLD })] })] });
+const header = new Header({ children: [new Paragraph({ bidirectional: true, alignment: AlignmentType.CENTER, children: [new TextRun({ text: 'ظل الحاكم', rightToLeft: true, font: FONT, size: 18, italics: true, color: GOLD })] })] });
 
 const doc = new Document({
-  creator: 'أرصاد وأطوار', title: 'أرصادٌ وأَطْوار — سرّ الحاكم: ثغرة الكسوف', description: 'رواية',
+  creator: 'ظل الحاكم', title: 'ظل الحاكم و ثُغْرَةُ الكُسوف', description: 'رواية',
   features: { updateFields: true },
   fonts: [{ name: FONT, data: font, characterSet: CharacterSet.ARABIC }, { name: FONT, data: fontB, characterSet: CharacterSet.ARABIC }],
   styles: {
