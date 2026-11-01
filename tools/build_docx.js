@@ -10,15 +10,16 @@ const {
 
 const S = (process.env.NOVEL_WORK || '/home/user/novel-work') + '/';
 const OUT = process.argv[2];
-let lines = fs.readFileSync(S + 'novel2.txt', 'utf8').split('\n').filter(l => l.trim()); if (process.env.LIMIT) lines = lines.slice(0, +process.env.LIMIT).concat(lines.filter(l => l.startsWith('@IMG') || l.startsWith('@USERIMG')).slice(5));
+let lines = fs.readFileSync(S + 'novel2.txt', 'utf8').split('\n').filter(l => l.trim()); if (process.env.LIMIT) lines = lines.slice(0, +process.env.LIMIT).concat(process.env.NOIMG ? [] : lines.filter(l => l.startsWith('@IMG') || l.startsWith('@USERIMG')).slice(5));
 const FNTXT = Object.assign(JSON.parse(fs.readFileSync(S + 'footnotes.json', 'utf8')), JSON.parse(fs.readFileSync(S + 'primer_fn.json', 'utf8')));
 const IMG = n => fs.readFileSync(fs.existsSync(S + 'art/jpg/' + n + '.jpg') ? S + 'art/jpg/' + n + '.jpg' : S + 'user/' + n + '.jpg');
 const UDIM = JSON.parse(fs.readFileSync(S + 'user/dims.json', 'utf8'));
 const FONT = 'Amiri';
 const INK = '2B2118', GOLD = '8A6A3A';
 
-// ---- page geometry: 6 x 9 in trade paperback
-const PAGE_W = 8640, PAGE_H = 12960, M = { top: 1150, bottom: 1080, left: 1000, right: 1000, header: 560, footer: 520 };
+// ---- page geometry: 14 x 21 cm (standard Arabic novel format)
+const PAGE_W = 7937, PAGE_H = 11906, M = { top: 1000, bottom: 1000, left: 960, right: 960, header: 500, footer: 470 };
+const TEXT_H_PX = Math.floor((PAGE_H - M.top - M.bottom) / 15);
 const TEXT_W_PX = Math.floor((PAGE_W - M.left - M.right) / 15); // twips -> px (96 dpi)
 
 // ---- footnotes
@@ -41,7 +42,7 @@ function runs(text, opt = {}) {
     if (p === '**') { bold = !bold; continue; }
     const m = p.match(/^⟦fn:([a-z0-9_]+)⟧$/);
     if (m) { out.push(fnRef(m[1])); continue; }
-    out.push(new TextRun({ text: p, rightToLeft: true, font: FONT, size: opt.size || 26, bold: opt.bold || bold, italics: opt.italics, color: opt.color || INK }));
+    out.push(new TextRun({ text: p, rightToLeft: true, font: FONT, size: opt.size || 25, bold: opt.bold || bold, italics: opt.italics, color: opt.color || INK }));
   }
   return out;
 }
@@ -57,7 +58,7 @@ const C = (text, o = {}) => P(text, Object.assign({ align: AlignmentType.CENTER,
 const blank = (n = 1) => Array.from({ length: n }, () => new Paragraph({ children: [] }));
 const star = () => C('✦', { size: 22, color: GOLD, before: 120, after: 120 });
 function image(name, w, h, cap) {
-  const out = [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 200, after: 80 }, keepNext: true,
+  const out = [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 200, after: 80 }, keepNext: !!cap,
     children: [new ImageRun({ type: 'jpg', data: IMG(name), transformation: { width: w, height: h }, altText: { title: cap || name, description: cap || name, name } })] })];
   if (cap) out.push(C(cap, { size: 19, italics: true, color: '5A4A3A', after: 240, line: 260 }));
   return out;
@@ -67,7 +68,7 @@ const DIM = {
   d_abjad: [1600, 900], d_umbra: [1600, 900], d_basin: [1600, 900], d_conj: [1600, 900], d_saros: [1600, 1000], d_pyramid: [1600, 1100], d_map: [1600, 1250],
   t_eras: [1600, 1000], t_fatimid: [1400, 2100],
 };
-function fit(name, maxW = TEXT_W_PX, maxH = 560) {
+function fit(name, maxW = TEXT_W_PX, maxH = TEXT_H_PX - 160) {
   const [w, h] = DIM[name]; let W = maxW, H = Math.round(h * W / w);
   if (H > maxH) { H = maxH; W = Math.round(w * H / h); }
   return [W, H];
@@ -146,8 +147,9 @@ for (const l of lines) {
       body.push(C(f[1], { size: 36, bold: true, color: '6B4A1A', pageBreak: true, heading: HeadingLevel.HEADING_1, before: 400, after: 300 }));
       continue;
     case '@USERIMG': {
-      const [w0, h0] = UDIM[f[1]]; let W = TEXT_W_PX, H = Math.round(h0 * W / w0);
-      if (H > 600) { H = 600; W = Math.round(w0 * H / h0); }
+      const [w0, h0] = UDIM[f[1]]; let W = Math.round(TEXT_W_PX * (+f[3] || 1)), H = Math.round(h0 * W / w0);
+      const maxH = f[2] ? TEXT_H_PX - 160 : TEXT_H_PX - 120;
+      if (H > maxH) { H = maxH; W = Math.round(w0 * H / h0); }
       body.push(...image(f[1], W, H, f[2]));
       continue;
     }
@@ -273,6 +275,8 @@ ins('المستعر الأعظم', ['٣٩٥–٣٩٧هـ', '١٠٠٥–١٠٠٧�
 ins('المستعر الأعظم', ['١٦ شوّال ٣٩٦هـ', '١٦ يوليو ١٠٠٦م', 'سيف يرصد الطلوع الفجريّ للشِّعرى اليمانية من سطح دندرة، ويتذكّر «بلوغ الأمنية»', 'تاريخيّ (الطلوع) / روائيّ', 'الفصل ١٧']);
 ins('ابن الهيثم في مصر', ['٤٠٠هـ', '١٠١٠م', 'عامر القُرّيّ يكشف نفسه في خان الأشمونين ويعرض الحلف على سيف فيرفض', 'روائيّ', 'الفصل ٢١']);
 ins('اختفاء الحاكم', ['٢٨ شوّال ٤١١هـ', '١٤ فبراير ١٠٢١م', 'كسوفٌ حلقيّ يقع على بحرٍ في أقصى الجنوب ولا يُرى من مصر: لا ظلَّ للحاكم ولا ثُغرة، فيختار الرحيل', 'تاريخيّ (الكسوف) / روائيّ', 'الورقة ٣٣']);
+ins('حجرة المأمون', ['٤٠٤هـ', '١٠١٣م', 'الحاكم يجعل ولاية عهده لابن عمّه عبد الرحيم بن إلياس دون ابنه؛ ريحانة تأتي سيفًا بالدينار الجديد', 'تاريخيّ / روائيّ', 'الورقة ٢٩']);
+ins('حمزة بن عليّ يدعو', ['رمضان ٤١١هـ', 'يناير ١٠٢١م', 'الحاكم يرمي أخته ستّ الملك بأنّ الرجال يدخلون عليها؛ ولا يُفسَّر ذلك إلا ليلة المقطّم', 'تاريخيّ (الخبر) / روائيّ (تفسيره)', 'الورقة ٣١']);
 ins('كسوفٌ كلّيّ يمرّ', ['٣٨٣هـ', '٩٩٣م', 'منجّمٌ حرّانيّ يقترح على العزيز «الملكَ البديل» كما صنع ملوك بابل، فيأبى؛ والصبيّ الحاكم يسمع', 'روائيّ بفكرةٍ تاريخيّة', 'الورقة ٢']);
 TL.forEach(r => { if (r[2].startsWith('حجرة المأمون')) r[2] = 'حجرة المأمون: الحساب يقع في ٢٩ صفر ١٤٤٩؛ خسوف القمر و«العلامة»؛ العودة إلى القاهرة'; });
 TL.forEach(r => { r[4] = r[4].replace(/الفصول/g, 'الأوراق').replace(/الفصلان/g, 'الورقتان').replace(/الفصل/g, 'الورقة').replace(/مدخل السفر/g, 'دفتر المحقِّق، السِّفر').replace(/المداخل/g, 'دفتر المحقِّق'); });
@@ -314,8 +318,8 @@ if (process.env.TOC_JSON && fs.existsSync(process.env.TOC_JSON)) {
 }
 const appendixImages = [
   C('ملحق: فهرس الرسوم', { size: 36, bold: true, color: '6B4A1A', pageBreak: true, heading: HeadingLevel.HEADING_1, before: 200, after: 240 }),
-  ...lines.filter(l => l.startsWith('@IMG') || l.startsWith('@USERIMG')).map((l, i) => P((i + 1).toLocaleString('ar-EG') + '. ' + l.split('|')[2], { size: 22, noIndent: true, after: 90, line: 290 })),
-  P('جميع الرسوم أُعدّت خصّيصًا لهذه الطبعة. والمشاهدُ التاريخيّة فيها تصوّرٌ فنّيٌّ لا وثيقة، والرسومُ الفلكيّة والخرائطُ تقريبيّةٌ للتوضيح.', { size: 21, italics: true, noIndent: true, before: 200 }),
+  ...lines.filter(l => (l.startsWith('@IMG') || l.startsWith('@USERIMG')) && l.split('|')[2]).map((l, i) => P((i + 1).toLocaleString('ar-EG') + '. ' + l.split('|')[2], { size: 22, noIndent: true, after: 90, line: 290 })),
+  P('الرسوم أُعدّت خصّيصًا لهذه الطبعة، عدا خرائطِ مسارات الكسوف لسنوات ٩٩٣ و١٠٠٤ و٢٠٢٧م، فهي عن «Five Millennium Canon of Solar Eclipses» لفريد إسبيناك وجان ميوس (ناسا). والمشاهدُ التاريخيّة فيها تصوّرٌ فنّيٌّ لا وثيقة، والرسومُ الفلكيّة والخرائطُ تقريبيّةٌ للتوضيح.', { size: 21, italics: true, noIndent: true, before: 200 }),
 ];
 
 // =============================================================== ASSEMBLE
@@ -330,7 +334,7 @@ const doc = new Document({
   features: { updateFields: true },
   fonts: [{ name: FONT, data: font, characterSet: CharacterSet.ARABIC }, { name: FONT, data: fontB, characterSet: CharacterSet.ARABIC }],
   styles: {
-    default: { document: { run: { font: FONT, size: 26, rightToLeft: true }, paragraph: { bidirectional: true } } },
+    default: { document: { run: { font: FONT, size: 25, rightToLeft: true }, paragraph: { bidirectional: true } } },
     paragraphStyles: [
       { id: 'Heading1', name: 'Heading 1', basedOn: 'Normal', next: 'Normal', quickFormat: true, run: { font: FONT, size: 44, bold: true, color: '6B4A1A' }, paragraph: { bidirectional: true, alignment: AlignmentType.CENTER, outlineLevel: 0 } },
       { id: 'Heading2', name: 'Heading 2', basedOn: 'Normal', next: 'Normal', quickFormat: true, run: { font: FONT, size: 36, bold: true, color: '6B4A1A' }, paragraph: { bidirectional: true, alignment: AlignmentType.CENTER, outlineLevel: 1 } },
@@ -339,9 +343,12 @@ const doc = new Document({
   footnotes,
   sections: [
     { properties: { page: { size: { width: PAGE_W, height: PAGE_H }, margin: { top: 0, bottom: 0, left: 0, right: 0, header: 0, footer: 0 } } },
-      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [new ImageRun({ type: 'jpg', data: IMG('cover'), transformation: { width: 576, height: 863 }, altText: { title: 'الغلاف', description: 'غلاف رواية أرصاد وأطوار', name: 'cover' } })] })] },
+      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [new ImageRun({ type: 'jpg', data: IMG('u_cover'), transformation: { width: Math.floor(PAGE_W / 15), height: Math.floor(PAGE_H / 15) - 1 }, altText: { title: 'الغلاف', description: 'غلاف رواية ظل الحاكم', name: 'cover' } })] })] },
     { properties: Object.assign({ type: SectionType.NEXT_PAGE }, pageProps), children: front },
     { properties: Object.assign({ type: SectionType.NEXT_PAGE, page: { size: { width: PAGE_W, height: PAGE_H }, margin: M, pageNumbers: { start: 1 } } }), headers: { default: header }, footers: { default: footer }, children: body.concat(back, appendixTL, appendixImages, tocEnd) },
+    { properties: { type: SectionType.NEXT_PAGE, page: { size: { width: PAGE_W, height: PAGE_H }, margin: { top: 0, bottom: 0, left: 0, right: 0, header: 0, footer: 0 } } },
+      headers: { default: new Header({ children: [new Paragraph({ children: [] })] }) }, footers: { default: new Footer({ children: [new Paragraph({ children: [] })] }) },
+      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [new ImageRun({ type: 'jpg', data: IMG('u_closing'), transformation: { width: Math.floor(PAGE_W / 15), height: Math.floor(PAGE_H / 15) - 1 }, altText: { title: 'الخاتمة', description: 'لوحة الخاتمة', name: 'closing' } })] })] },
   ],
 });
 Packer.toBuffer(doc).then(buf => { fs.writeFileSync(OUT, buf); console.log('written', OUT, (buf.length / 1e6).toFixed(1) + ' MB', 'footnotes:', fnNext - 1); });
