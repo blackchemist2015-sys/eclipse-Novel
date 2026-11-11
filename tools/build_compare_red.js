@@ -28,10 +28,11 @@ for (let l of fs.readFileSync(REP, 'utf8').split('\n')) {
 }
 for (const s of data) {
   const changed = s.rows.filter(r => r.c).length;
+  if (process.env.ONLY_CHANGED && !changed) continue;
   body.push(P(s.title, { size: 26, bold: true, color: '6B4A1A', heading: HeadingLevel.HEADING_2, pb: true, after: 40 }));
   body.push(P('قبل: ' + s.wo.toLocaleString('ar-EG') + ' كلمة — بعد: ' + s.wn.toLocaleString('ar-EG') + ' كلمة — فقرات متغيّرة: ' + changed.toLocaleString('ar-EG'), { size: 18, color: '8A6A3A', after: 100 }));
   const rows = [new TableRow({ tableHeader: true, children: [cell([P('قبل', { bold: true, align: AlignmentType.CENTER })], 'E9D9B0'), cell([P('بعد', { bold: true, align: AlignmentType.CENTER })], 'E9D9B0')] })];
-  for (const r of s.rows) rows.push(new TableRow({ children: [cell(r.o.length ? [segP(r.o, 'o')] : [], r.c ? 'FBF3F3' : undefined), cell(r.n.length ? [segP(r.n, 'n')] : [], r.c ? 'FBF3F3' : undefined)] }));
+  for (const r of s.rows) if (!process.env.ONLY_CHANGED || r.c) rows.push(new TableRow({ children: [cell(r.o.length ? [segP(r.o, 'o')] : [], r.c ? 'FBF3F3' : undefined), cell(r.n.length ? [segP(r.n, 'n')] : [], r.c ? 'FBF3F3' : undefined)] }));
   body.push(new Table({ width: { size: TW, type: WidthType.DXA }, columnWidths: [CW, CW], visuallyRightToLeft: true, rows }));
 }
 const doc = new Document({ fonts: [{ name: FONT, data: fs.readFileSync(S + 'fonts/Amiri-Regular.ttf'), characterSet: CharacterSet.ARABIC }, { name: FONT, data: fs.readFileSync(S + 'fonts/Amiri-Bold.ttf'), characterSet: CharacterSet.ARABIC }],
