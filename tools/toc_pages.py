@@ -17,7 +17,7 @@ for l in open(novel).read().split('\n'):
         entries.append((2, t, t[ci + 2:] if ci > 0 else t))
     elif l.startswith('#APPENDIX'): entries.append((1, f[1], f[1]))
 pt = [x.split('|')[1] for x in open(primer).read().split('\n') if x.startswith('#TITLE')]
-for t in ['شخوصُ الرواية'] + pt + ['الخطُّ الزمنيّ للرواية', 'ملحق: الخطّ الزمنيّ المفصّل', 'ملحق: فهرس الرسوم']:
+for t in ['شخوصُ الرواية'] + pt + ['الخطُّ الزمنيّ للرواية', 'خطوطُ الشخصيّات وتقاطعاتُها', 'ملحق: الخطّ الزمنيّ المفصّل', 'ملحق: فهرس الرسوم']:
     entries.append((1, t, t))
 n = int(re.search(r'Pages:\s+(\d+)', subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout).group(1))
 pages = []
